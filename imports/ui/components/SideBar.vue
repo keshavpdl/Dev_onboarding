@@ -1,0 +1,99 @@
+<template>
+  <div class="sidebar-container">
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <h1 class="crm-title">
+          <router-link to="/" class="crm-link">Dashboard</router-link>
+        </h1>
+      </div>
+      <ul class="sidebar-menu">
+        <li>
+          <router-link to="/organizations" class="link">
+            <span class="icon">&#x1F4C3;</span> <!-- Organization icon -->
+            Organizations
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/contacts" class="link">
+            <span class="icon">&#x1F4E9;</span> <!-- Contacts icon -->
+            Contacts
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/tags" class="link">
+            <span class="icon">&#x1F516;</span> <!-- Tags icon -->
+            Tags
+          </router-link>
+        </li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "SideBar",
+};
+</script>
+
+<style scoped>
+.sidebar-container {
+  height: 100%;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.crm-title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.crm-link {
+  color: #333;
+  text-decoration: none;
+}
+
+.sidebar-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  color: #555;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #000;
+  background-color: #e6e6e6;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.router-link-exact-active {
+  color: #f1f1f1;
+  background-color: #888;
+}
+</style>
