@@ -46,7 +46,7 @@
 //   },
 // });
 
-import { ContactsCollection } from "../db/ContactsCollection.js";
+import { ContactsCollection } from "../../db/ContactsCollection.js";
 
 Meteor.methods({
   "contacts.insert"(contactDetails) {

@@ -1,5 +1,5 @@
 import { check } from "meteor/check";
-import { OrganizationsCollection } from "../db/OrganizationsCollection.js";
+import { OrganizationsCollection } from "../../db/OrganizationsCollection.js";
 
 Meteor.methods({
   "organizations.insert"(organizationDetails) {

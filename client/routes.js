@@ -2,10 +2,10 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
-import OrganizationsTab from "../imports/ui/components/OrganizationsTab.vue";
-import ContactsTab from "../imports/ui/components/ContactsTab.vue";
-import TagsTab from "../imports/ui/components/TagsTab.vue";
-import WelcomeTab from "../imports/ui/components/WelcomeTab.vue";
+import OrganizationsTab from "../imports/ui/components/Organizations.vue";
+import ContactsTab from "../imports/ui/components/Contacts.vue";
+import TagsTab from "../imports/ui/components/Tags.vue";
+import WelcomeTab from "../imports/ui/components/Welcome.vue";
 
 const routes = [
   {

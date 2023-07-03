@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import LoginForm from "./components/LoginForm.vue";
+import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
 import { Meteor } from "meteor/meteor";
 

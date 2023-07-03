@@ -40,9 +40,9 @@
   </div>
 </template>
 <script>
-import AddOrganizationForm from "./AddOrganizationForm.vue";
+import AddOrganizationForm from "./forms/AddOrganizationForm.vue";
 import { OrganizationsCollection } from "../../db/OrganizationsCollection";
-import AddUserForm from "./AddUserForm.vue";
+import AddUserForm from "./forms/AddUserForm.vue";
 import { Meteor } from "meteor/meteor";
 export default {
   name: "OrganizationsTab",

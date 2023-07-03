@@ -1,10 +1,10 @@
 import { Meteor } from "meteor/meteor";
-import "/imports/api/organizationsMethods";
-import "/imports/api/organizationsPublications";
-import "/imports/api/accountsMethods";
-import "/imports/api/usersPublications";
-import "/imports/api/contactsPublications";
-import "/imports/api/contactsMethods";
+import "/imports/api/methods/organizationsMethods";
+import "/imports/api/publications/organizationsPublications";
+import "/imports/api/methods/accountsMethods";
+import "/imports/api/publications/usersPublications";
+import "/imports/api/publications/contactsPublications";
+import "/imports/api/methods/contactsMethods";
 import { OrganizationsCollection } from "/imports/db/OrganizationsCollection";
 import { Accounts } from "meteor/accounts-base";
 
