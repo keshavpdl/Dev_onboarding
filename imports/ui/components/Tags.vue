@@ -1,25 +1,25 @@
-<!-- <template>
+<template>
   <div class="tags-tab">
-    <h3>tags List</h3>
-    <div class="tags-count">Total tags: {{ tags.length }}</div>
+    <h3>Tags List</h3>
+    <div class="contact-count">Total Tags: {{ tags.length }}</div>
     <div class="add-tags-button">
-      <button @click="addtags" class="addtags">Add tags</button>
+      <button @click="addTag" class="addTag">Add Tag</button>
     </div>
-    <table class="tags-table">
+    <table class="tag-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Tags Name</th>
           <th>Description</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(tags) in paginatedtags" :key="tags._id">
-          <td>{{ tags.name }}</td>
+        <tr v-for="(tags) in paginatedContacts" :key="tags._id">
+          <td>{{ tags.tagsname }}</td>
           <td>{{ tags.description }}</td>
           <td>
-            <button @click="edittags(tags)">Edit</button>
-            <button @click="deletetags(tags._id)">Delete</button>
+            <button @click="editTag(tags)" class = "edit-tag-button" >Edit</button>
+            <button @click="deleteTag(tags._id)" class = "delete-tag-button">Delete</button>
           </td>
         </tr>
       </tbody>
@@ -28,16 +28,17 @@
       <button @click="goToPreviousPage" :disabled="currentPage === 1">Previous</button>
       <button @click="goToNextPage" :disabled="currentPage === totalPages">Next</button>
     </div>
-    <AddTagForm ref="addtagsForm" />
+    <AddTagForm ref="addTagsForm" />
   </div>
 </template>
 
 <script>
-import { tagsCollection } from "../../db/tagsCollection";
-import AddTagForm from "./AddTagsForm.vue";
+import { TagsCollection } from "../../db/TagsCollection";
+import AddTagForm from "./forms/AddTagsForm.vue";
+
 
 export default {
-  name: "tagsTab",
+  name: "TagsTab",
   components: {
     AddTagForm,
   },
@@ -55,11 +56,11 @@ export default {
       return Meteor.user();
     },
     tags() {
-      return tagsCollection.find({}, { sort: { createdAt: -1 } });
+      return TagsCollection.find({}, { sort: { createdAt: -1 } });
     },
   },
   computed: {
-    paginatedtags() {
+    paginatedContacts() {
       const startIndex = (this.currentPage - 1) * this.tagsPerPage;
       const endIndex = startIndex + this.tagsPerPage;
       return this.tags.slice(startIndex, endIndex);
@@ -69,16 +70,16 @@ export default {
     },
   },
   methods: {
-    addtags() {
-      this.$refs.addtagsForm.resetForm();
-      this.$refs.addtagsForm.show();
+    addTag() {
+      this.$refs.addTagsForm.resetForm();
+      this.$refs.addTagsForm.show();
     },
-    edittags(tags) {
-      this.$refs.addtagsForm.selectedtags = tags;
-      this.$refs.addtagsForm.populateFormFields();
-      this.$refs.addtagsForm.show(tags);
+    editTag(tags) {
+      this.$refs.addTagsForm.selectedTag = tags;
+      this.$refs.addTagsForm.populateFormFields();
+      this.$refs.addTagsForm.show(tags);
     },
-    deletetags(tagsId) {
+    deleteTag(tagsId) {
       Meteor.call("tags.remove", tagsId);
     },
     goToPreviousPage() {
@@ -95,13 +96,12 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .tags-tab {
   text-align: left;
 }
 
-.tags-count {
+.contact-count {
   margin-bottom: 10px;
 }
 
@@ -109,7 +109,7 @@ export default {
   margin-bottom: 10px;
 }
 
-.addtags {
+.addTag {
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -118,26 +118,26 @@ export default {
   cursor: pointer;
 }
 
-.tags-table {
+.tag-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.tags-table th,
-.tags-table td {
+.tag-table th,
+.tag-table td {
   padding: 8px;
   border: 1px solid #ccc;
 }
 
-.tags-table th {
+.tag-table th {
   background-color: #f0f0f0;
 }
 
-.tags-table td {
+.tag-table td {
   text-align: left;
 }
 
-.tags-table button {
+.edit-tag-button {
   padding: 5px 10px;
   background-color: #007bff;
   color: #fff;
@@ -145,8 +145,15 @@ export default {
   border-radius: 4px;
   cursor: pointer;
 }
-
+.delete-tag-button {
+  padding: 5px 10px;
+  background-color:red;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
 .cancel-button {
   background-color: #ccc;
 }
-</style> -->
+</style>

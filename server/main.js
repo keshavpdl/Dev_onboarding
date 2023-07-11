@@ -5,11 +5,13 @@ import "/imports/api/methods/accountsMethods";
 import "/imports/api/publications/usersPublications";
 import "/imports/api/publications/contactsPublications";
 import "/imports/api/methods/contactsMethods";
+import "/imports/api/methods/tagsMethods";
+import "/imports/api/publications/tagsPublications";
 import { OrganizationsCollection } from "/imports/db/OrganizationsCollection";
 import { Accounts } from "meteor/accounts-base";
 
-const SEED_USERNAME = "keela";
-const SEED_PASSWORD = "abcd";
+const SEED_USERNAME = "keela-admin";
+const SEED_PASSWORD = "test";
 
 Meteor.startup(() => {
   //code when the server starts
