@@ -1,8 +1,11 @@
 <template>
   <div class="controls">
-    <modal name="addTagModal" :adaptive="true">
+    <modal name="addTagModal" :adaptive="true" width="400px" height="200px">
       <div class="addTagModal">
         <div class="card">
+          <div class="form-header">
+            <button class="close-button" @click="handleCancel">×</button>
+          </div>
           <form class="tag-form" @submit.prevent="handleSubmit">
             <div class="form-group">
               <label for="fullName">Tags Name</label>
@@ -100,10 +103,6 @@ export default {
   text-align: center;
 }
 
-.modal {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .addTagModal {
   display: flex;
   justify-content: center;
@@ -117,8 +116,9 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  width: fit-content;
-  max-width: 100%;
+  /* height: fit-content; */
+  height: 100%;
+  width: 100%;
 }
 
 .tag-form .form-group {
@@ -162,5 +162,14 @@ export default {
 
 .cancel-button {
   background-color: #ccc;
+}
+.close-button {
+  border: none;
+  background: transparent;
+  font-size: 30px;
+  color:lightcoral;
+  cursor: pointer;
+  margin-left: 95%;
+  margin-top: -15%;
 }
 </style>

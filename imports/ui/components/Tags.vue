@@ -1,7 +1,7 @@
 <template>
   <div class="tags-tab">
     <h3>Tags List</h3>
-    <div class="contact-count">Total Tags: {{ tags.length }}</div>
+    <div class="tag-count">Total Tags: {{ tags.length }}</div>
     <div class="add-tags-button">
       <button @click="addTag" class="addTag">Add Tag</button>
     </div>
@@ -14,19 +14,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(tags) in paginatedContacts" :key="tags._id">
+        <tr v-for="tags in paginatedTags" :key="tags._id">
           <td>{{ tags.tagsname }}</td>
           <td>{{ tags.description }}</td>
           <td>
-            <button @click="editTag(tags)" class = "edit-tag-button" >Edit</button>
+            <button @click="editTag(tags)" class="edit-tag-button">Edit</button>
             <button @click="deleteTag(tags._id)" class = "delete-tag-button">Delete</button>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="pagination">
-      <button @click="goToPreviousPage" :disabled="currentPage === 1">Previous</button>
-      <button @click="goToNextPage" :disabled="currentPage === totalPages">Next</button>
+      <button @click="goToPreviousPage" :disabled="currentPage === 1">
+        Previous
+      </button>
+      <button @click="goToNextPage" :disabled="currentPage === totalPages">
+        Next
+      </button>
     </div>
     <AddTagForm ref="addTagsForm" />
   </div>
@@ -35,7 +39,6 @@
 <script>
 import { TagsCollection } from "../../db/TagsCollection";
 import AddTagForm from "./forms/AddTagsForm.vue";
-
 
 export default {
   name: "TagsTab",
@@ -60,7 +63,7 @@ export default {
     },
   },
   computed: {
-    paginatedContacts() {
+    paginatedTags() {
       const startIndex = (this.currentPage - 1) * this.tagsPerPage;
       const endIndex = startIndex + this.tagsPerPage;
       return this.tags.slice(startIndex, endIndex);
@@ -101,7 +104,7 @@ export default {
   text-align: left;
 }
 
-.contact-count {
+.tag-count {
   margin-bottom: 10px;
 }
 
@@ -147,13 +150,10 @@ export default {
 }
 .delete-tag-button {
   padding: 5px 10px;
-  background-color:red;
+  background-color: red;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-}
-.cancel-button {
-  background-color: #ccc;
 }
 </style>

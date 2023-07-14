@@ -3,7 +3,7 @@
     <div class="sidebar">
       <div class="sidebar-header">
         <h1 class="crm-title">
-          <router-link to="/" class="crm-link">Dashboard</router-link>
+          <router-link to="/" class="crm-link"><img src="keela-logo-full.png"  class="logo-image" height="100%" width="50%"/></router-link>
         </h1>
       </div>
       <ul class="sidebar-menu">
@@ -64,7 +64,6 @@ export default {
 }
 
 .crm-link {
-  color: #333;
   text-decoration: none;
 }
 

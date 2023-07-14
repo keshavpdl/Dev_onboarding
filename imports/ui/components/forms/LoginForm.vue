@@ -2,7 +2,7 @@
   <div class="center-container">
     <div class="card">
       <div class="card-header">
-        <img src="images/keela-logo.png" alt="Logo" class="logo-image" />
+        <img src="keela-logo-full.png" alt="Logo" class="logo-image" />
         <h2>Welcome to Keela</h2>
       </div>
 
@@ -77,7 +77,7 @@ export default {
 }
 
 .card-header {
-  background-color: #315481;
+  /* background-color: #315481; */
   color: #fff;
   padding: 20px;
   border-top-left-radius: 8px;
@@ -140,9 +140,8 @@ export default {
 }
 .logo-image {
   display: block;
-  width: 100px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin: 0 auto 16px; /* Add margin as needed */
+  width: 100%;
+  height: auto;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="controls">
-    <modal name="addContactModal" :adaptive="false">
+    <modal name="addContactModal" :adaptive="true" width="400px" height="250px">
       <div class="addContactModal">
         <div class="card">
           <div class="form-header">
@@ -59,19 +59,6 @@
                 />
               </div>
             </div>
-            <!-- <div class="form-group">
-              <label for="phone">Phone</label>
-              <div class="input-field">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone"
-                  required
-                  v-model="phone"
-                />
-              </div> -->
-            <!-- </div> -->
             <div class="button-group">
               <button type="submit" v-if="!selectedContact">Save</button>
               <button type="submit" v-else>Update</button>
