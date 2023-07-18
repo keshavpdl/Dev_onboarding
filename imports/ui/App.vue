@@ -38,6 +38,9 @@ export default {
   methods: {
     logout() {
       Meteor.logout();
+      if (this.$route.fullPath != "/") {
+        this.$router.replace("/");
+      }
     },
   },
 };
