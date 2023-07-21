@@ -13,8 +13,8 @@ Meteor.methods({
   "tags.update"(tagId, newTagDetails) {
     TagsCollection.update(tagId, {
       $set: {
-        tagsname: newTagDetails.tagsname,
-        description: newTagDetails.description
+        ...newTagDetails,
+        updatedAt: new Date(),
       },
     });
   },

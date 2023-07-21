@@ -23,14 +23,14 @@
             <div class="form-group">
               <label for="description">Description</label>
               <div class="input-field">
-                <input
+                <textarea
                   id="description"
                   name="description"
                   type="text"
                   placeholder="Description"
                   required
                   v-model="description"
-                />
+                ></textarea>
               </div>
             </div>
             <div class="button-group">
@@ -139,6 +139,12 @@ export default {
 }
 
 .tag-form .form-group .input-field input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.tag-form .form-group .input-field textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
