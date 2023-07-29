@@ -159,11 +159,15 @@ export default {
 
 .button-group button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+}
+.button-group button:hover{
+  background-color: #622cc9;
+
 }
 
 .cancel-button {

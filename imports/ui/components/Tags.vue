@@ -114,13 +114,17 @@ export default {
 
 .addTag {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
+.addTag:hover{
+  background-color: #622cc9;
+
+}
 .tag-table {
   width: 100%;
   border-collapse: collapse;
@@ -142,7 +146,7 @@ export default {
 
 .edit-tag-button {
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
   border-radius: 4px;

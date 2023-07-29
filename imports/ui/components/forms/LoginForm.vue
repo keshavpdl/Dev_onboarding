@@ -36,6 +36,14 @@
             <i class="material-icons">login</i>
             Log In
           </button>
+          <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+            Don't have an account?
+            <router-link
+              to="/register"
+              class="font-medium text-primary-600 hover:underline dark:bg-primary-600"
+              >Register here
+            </router-link>
+          </p>
         </div>
       </form>
     </div>
@@ -74,16 +82,16 @@ export default {
 }
 
 .card {
-  width: 400px;
+  /* width: 400px; */
   background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  /* background-color: #315481; */
   color: #fff;
-  padding: 20px;
+  /* padding: 20px; */
+  width: 90%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
@@ -117,17 +125,19 @@ export default {
   align-items: center;
   justify-content: center;
   width: 100%; /* Set the width to 100% */
-  height: 30px;
+  height: 40px;
   font-size: 16px;
-  background-color: #62807e;
+  background-color: #7745d6;
   color: white;
-  border: none;
+  border: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-bottom: 20px;
+  border-radius: 12px;
 }
 
 .login-button:hover {
-  background-color: #3f5d5b;
+  background-color: #622cc9;
 }
 
 .login-button i {
@@ -147,5 +157,4 @@ export default {
   width: 100%;
   height: auto;
 }
-
 </style>

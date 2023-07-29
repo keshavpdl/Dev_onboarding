@@ -112,6 +112,7 @@ export default {
 .add-contact-button {
   margin-bottom: 10px;
 }
+
 .delete-contact-button {
   padding: 5px 10px;
   background-color:red;
@@ -122,22 +123,28 @@ export default {
 }
 .edit-contact-button {
   padding: 5px 10px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+.edit-contact-button:hover{
+  background-color: #622cc9;
 }
 
 .addContact {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   cursor: pointer;
 }
 
+.add-contact:hover {
+  background-color: #622cc9;
+}
 .contact-table {
   width: 100%;
   border-collapse: collapse;

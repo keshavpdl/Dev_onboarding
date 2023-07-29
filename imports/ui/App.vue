@@ -58,16 +58,17 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 8px;
-  font-size: 16px;
-  background-color: #62807e;
+  font-size: 18px;
+  background-color: #7745d6;
   color: white;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s;
+  border-radius: 12px;
 }
 
 .user-logout button:hover {
-  background-color: #3f5d5b;
+  background-color: #622cc9;
 }
 
 .user-logout i {

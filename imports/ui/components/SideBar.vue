@@ -3,7 +3,9 @@
     <div class="sidebar">
       <div class="sidebar-header">
         <h1 class="crm-title">
-          <router-link to="/" class="crm-link"><img src="keela-logo-full.png"  class="logo-image" height="100%" width="50%"/></router-link>
+          <!-- <router-link to="/" class="crm-link"> -->
+            <img src="keela-logo-full.png"  class="logo-image" height="100%" width="50%"/>
+            <!-- </router-link> -->
         </h1>
       </div>
       <ul class="sidebar-menu">
@@ -43,7 +45,7 @@ export default {
 
 .sidebar {
   width: 240px;
-  background-color: #f2f2f2;
+  background-color: #9e989828;
   padding: 20px;
   position: fixed;
   left: 0;
@@ -63,9 +65,10 @@ export default {
   font-weight: bold;
 }
 
-.crm-link {
+/* .crm-link {
   text-decoration: none;
-}
+  background: none;
+} */
 
 .sidebar-menu {
   list-style-type: none;
@@ -77,14 +80,13 @@ export default {
   display: flex;
   align-items: center;
   padding: 10px 0;
-  color: #555;
+  color: black;
   font-size: 16px;
   text-decoration: none;
 }
 
 .link:hover {
-  color: #000;
-  background-color: #e6e6e6;
+  color: #6ab500;
 }
 
 .icon {
@@ -93,6 +95,6 @@ export default {
 
 .router-link-exact-active {
   color: #f1f1f1;
-  background-color: #888;
+  background-color: #7745d6;
 }
 </style>
