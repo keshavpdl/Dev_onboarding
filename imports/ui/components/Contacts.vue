@@ -148,6 +148,9 @@ export default {
 .contact-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: auto;
+  margin-bottom:auto ;
+  /* position: absolute; */
 }
 
 .contact-table th,

@@ -195,7 +195,6 @@ export default {
 
 .button-group button {
   padding: 10px 20px;
-  /* background-color: #007bff; */
   background-color: #7745d6;
   color: #fff;
   border: none;

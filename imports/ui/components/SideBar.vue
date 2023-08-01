@@ -16,6 +16,12 @@
           </router-link>
         </li>
         <li>
+          <router-link to="/users" class="link">
+            <span class="icon">&#x1F4C3;</span> <!-- Organization icon -->
+            Users
+          </router-link>
+        </li>
+        <li>
           <router-link to="/contacts" class="link">
             <span class="icon">&#x1F4E9;</span> <!-- Contacts icon -->
             Contacts

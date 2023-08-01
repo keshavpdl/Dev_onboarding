@@ -25,5 +25,7 @@ export default {
   text-align: center;
   color: #333;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding-top:20px;
+  align-self: center;
 }
 </style>

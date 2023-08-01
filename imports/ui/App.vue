@@ -15,7 +15,7 @@
             <router-view></router-view>
           </div>
         </div>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
@@ -24,11 +24,14 @@
 import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
 import { Meteor } from "meteor/meteor";
+import Register from "./components/forms/Register.vue";
+// import '~@fortawesome/fontawesome-free/css/all.min.css';
 
 export default {
   components: {
     LoginForm,
     SideBar,
+    Register
   },
   meteor: {
     currentUser() {
@@ -49,8 +52,8 @@ export default {
 <style scoped>
 .user-logout {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
 }
 
 .user-logout button {
