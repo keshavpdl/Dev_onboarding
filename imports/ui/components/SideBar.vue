@@ -4,32 +4,38 @@
       <div class="sidebar-header">
         <h1 class="crm-title">
           <!-- <router-link to="/" class="crm-link"> -->
-            <img src="keela-logo-full.png"  class="logo-image" height="100%" width="50%"/>
-            <!-- </router-link> -->
+          <img
+            src="keela-logo-full.png"
+            class="logo-image"
+            height="100%"
+            width="50%"
+          />
+          <!-- </router-link> -->
         </h1>
       </div>
       <ul class="sidebar-menu">
         <li>
           <router-link to="/organizations" class="link">
-            <span class="icon">&#x1F4C3;</span> <!-- Organization icon -->
+            <i class="material-icons"> corporate_fare </i>
             Organizations
           </router-link>
         </li>
         <li>
           <router-link to="/users" class="link">
-            <span class="icon">&#x1F4C3;</span> <!-- Organization icon -->
+            <i class="material-icons"> contacts </i>
             Users
           </router-link>
         </li>
         <li>
           <router-link to="/contacts" class="link">
-            <span class="icon">&#x1F4E9;</span> <!-- Contacts icon -->
+            <i class="material-icons"> groups </i>
             Contacts
           </router-link>
         </li>
         <li>
           <router-link to="/tags" class="link">
-            <span class="icon">&#x1F516;</span> <!-- Tags icon -->
+            <!-- <span class="icon">&#x1F516;</span> -->
+            <i class="material-icons"> label </i>
             Tags
           </router-link>
         </li>

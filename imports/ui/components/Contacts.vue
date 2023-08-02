@@ -21,7 +21,7 @@
           <td>{{ contact.email }}</td>
           <td>{{ contact.address }}</td>
           <td>{{ contact.phone }}</td>
-          <td>
+          <td v-if="currentUser.profile.role == 'Admin'">
             <button @click="editContact(contact)" class="edit-contact-button" v-if="currentUser.profile.role == 'Admin'">Edit</button>
             <button @click="deleteContact(contact._id)" class="delete-contact-button" v-if="currentUser.profile.role == 'Admin'">Delete</button>
           </td>

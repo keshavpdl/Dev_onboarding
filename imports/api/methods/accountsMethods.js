@@ -10,7 +10,13 @@ Meteor.methods({
     // preventing removal of users with role of keelaAdmin
     Meteor.users.remove({ _id: userId, "profile.role": { $ne: "keelaAdmin" } });
   },
-  "accounts.update"(userId, newAccountDetails) {
-    Meteor.users.update({_id: userId, newAccountDetails})
+  "accounts.update"(
+    userId,
+    { username, password, profile } = newAccountDetails
+  ) {
+    if (password !== "") {
+      Accounts.setPassword(userId, password);
+    }
+    Meteor.users.update({ _id: userId }, { $set: { username, profile } });
   },
 });

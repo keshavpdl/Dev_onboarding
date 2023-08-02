@@ -1,192 +1,6 @@
-<!-- <template>
-  <div class="controls">
-    <button @click="show" class="addUser">Add User</button>
-    <modal name="addUserModal">
-      <div class="addUserModal">
-        <form class="login-form" @submit.prevent="handleSubmit">
-          <div class="input-field">
-            <label for="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              placeholder="Username"
-              required
-              v-model="username"
-            />
-          </div>
-
-          <div class="input-field">
-            <label for="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="text"
-              placeholder="password"
-              required
-              v-model="password"
-            />
-          </div>
-
-          <div class="input-field">
-            <label for="role">Role</label>
-            <input
-              id="role"
-              name="role"
-              type="text"
-              placeholder="role"
-              required
-              v-model="role"
-            />
-          </div>
-
-          <div class="input-field">
-            <label for="address">Address</label>
-            <input
-              id="address"
-              name="address"
-              type="text"
-              placeholder="Address"
-              required
-              v-model="address"
-            />
-          </div>
-
-          <div class="input-field">
-            <label for="phone">Phone</label>
-            <input
-              id="phone"
-              name="phone"
-              type="text"
-              placeholder="Phone"
-              required
-              v-model="phone"
-            />
-          </div>
-
-          <div>
-            <button type="submit">Add</button>
-          </div>
-          <button @click="hide" class="close-modal-button">Close</button>
-        </form>
-      </div>
-    </modal>
-  </div>
-</template>
-<script>
-export default {
-  name: "AddUserForm",
-  data() {
-    return {
-      username: "",
-      password: "",
-      role: "",
-      address: "",
-      phone: "",
-    };
-  },
-  meteor: {
-    currentUser() {
-      return Meteor.user();
-    },
-  },
-  methods: {
-    show() {
-      this.$modal.show("addUserModal");
-    },
-    hide() {
-      this.$modal.hide("addUserModal");
-    },
-    handleSubmit(event) {
-      Meteor.call("accounts.insert", {
-        username: this.username,
-        password: this.password,
-        profile: {
-          role: this.role,
-          address: this.address,
-          phone: this.phone,
-          organizationId: this.$store.getters.getOrganization._id,
-        },
-      });
-      this.hide();
-    },
-  },
-};
-</script>
-
-<style scoped>
-.controls {
-  text-align: center;
-}
-
-.modal {
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.addUserModal {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: fit-content;
-  max-width: 100%;
-}
-
-.login-form .form-group {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.login-form .form-group label {
-  width: 100px;
-  text-align: right;
-  padding-right: 10px;
-}
-
-.login-form .form-group .input-field {
-  flex: 1;
-}
-
-.login-form .form-group .input-field input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.button-group {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
-
-.button-group button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.cancel-button {
-  background-color: #ccc;
-}
-</style> -->
-
 <template>
   <div class="controls">
-    <button @click="show" class="addUser">Add User</button>
+    <!-- <button @click="show" class="addUser">Add User</button> -->
     <modal name="addUserModal" :adaptive="true" width="400px" height="300px">
       <div class="addUserModal">
         <div class="card">
@@ -197,56 +11,68 @@ export default {
             <div class="form-group">
               <label for="username">Username</label>
               <div class="input-field">
-              <input
-                id="username"
-                name="username"
-                type="text"
-                placeholder="Username"
-                required
-                v-model="username"
-              />
+                <input
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  required
+                  v-model="username"
+                />
               </div>
             </div>
-
             <div class="form-group">
               <label for="password">Password</label>
               <div class="input-field">
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Password"
-                required
-                v-model="password"
-              />
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  required
+                  v-model="password"
+                />
               </div>
             </div>
+            <!-- <div class="form-group">
+              <label for="role">Role</label>
+              <div class="input-field">
+                <input
+                  id="role"
+                  name="role"
+                  type="text"
+                  placeholder="Role"
+                  required
+                  v-model="role"
+                />
+              </div> -->
 
+            <!-- </div> -->
             <div class="form-group">
               <label for="role">Role</label>
               <div class="input-field">
-              <input
-                id="role"
-                name="role"
-                type="text"
-                placeholder="Role"
-                required
-                v-model="role"
-              />
+                <select v-model="role" required>
+                  <option
+                    v-for="roleOption in roles"
+                    :key="roleOption"
+                    :value="roleOption"
+                  >
+                    {{ roleOption }}
+                  </option>
+                </select>
               </div>
             </div>
-
             <div class="form-group">
               <label for="address">Address</label>
               <div class="input-field">
-              <input
-                id="address"
-                name="address"
-                type="text"
-                placeholder="Address"
-                required
-                v-model="address"
-              />
+                <input
+                  id="address"
+                  name="address"
+                  type="text"
+                  placeholder="Address"
+                  required
+                  v-model="address"
+                />
               </div>
             </div>
             <div class="form-group">
@@ -264,8 +90,11 @@ export default {
             </div>
 
             <div class="button-group">
-              <button type="submit">Add</button>
-              <button @click="hide" class="cancel-button">Close</button>
+              <button type="submit" v-if="!selectedUser">Save</button>
+              <button type="submit" v-else>Update</button>
+              <button @click="handleCancel" type="button" class="cancel-button">
+                Cancel
+              </button>
             </div>
           </form>
         </div>
@@ -282,8 +111,11 @@ export default {
       username: "",
       password: "",
       role: "",
+      roles: ["Admin", "Coordinator", "KeelaAdmin"],
       address: "",
       phone: "",
+      organizationId: "",
+      selectedUser: null,
     };
   },
   meteor: {
@@ -292,27 +124,61 @@ export default {
     },
   },
   methods: {
-    show() {
+    show(user = null) {
+      this.selectedUser = user;
+      this.populateFormFields();
       this.$modal.show("addUserModal");
     },
     hide() {
+      this.resetForm();
       this.$modal.hide("addUserModal");
     },
-    handleSubmit(event) {
-      Meteor.call("accounts.insert", {
-        username: this.username,
-        password: this.password,
-        profile: {
-          role: this.role,
-          address: this.address,
-          phone: this.phone,
-          organizationId: this.$store.getters.getOrganization._id,
-        },
-      });
+    handleSubmit() {
+      if (this.selectedUser) {
+        Meteor.call("accounts.update", this.selectedUser._id, {
+          username: this.username,
+          password: this.password,
+          profile: {
+            role: this.role,
+            address: this.address,
+            phone: this.phone,
+            organizationId: this.$store.getters.getOrganization._id,
+          },
+        });
+      } else {
+        Meteor.call("accounts.insert", {
+          username: this.username,
+          password: this.password,
+          profile: {
+            role: this.role,
+            address: this.address,
+            phone: this.phone,
+            organizationId: this.$store.getters.getOrganization._id,
+          },
+        });
+      }
       this.hide();
     },
     handleCancel() {
       this.hide();
+    },
+    populateFormFields() {
+      if (this.selectedUser) {
+        this.username = this.selectedUser.username;
+        this.password = this.selectedUser.password;
+        this.role = this.selectedUser.role;
+        this.address = this.selectedUser.address;
+        this.phone = this.selectedUser.phone;
+        // this.organizationId =this.selectedUser.organizationId
+      }
+    },
+    resetForm() {
+      this.username = "";
+      this.password = "";
+      this.role = "";
+      this.address = "";
+      this.phone = "";
+      this.selectedUser = null;
     },
   },
 };
@@ -368,6 +234,12 @@ export default {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+.user-form .form-group .input-field select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
 .button-group {
   display: flex;
@@ -377,11 +249,15 @@ export default {
 
 .button-group button {
   padding: 10px 20px;
-  background-color: #007bff;
+  /* background-color: #007bff; */
+  background-color: #7745d6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+}
+.button-group button:hover {
+  background-color: #622cc9;
 }
 .close-button {
   border: none;
