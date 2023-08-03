@@ -15,12 +15,18 @@
       </div>
       <ul class="sidebar-menu">
         <li>
+          <router-link to="/" class="link">
+            <i class="material-icons"> home </i>
+            Dashboard
+          </router-link>
+        </li>
+        <li v-if="currentUser.profile.role == 'keelaAdmin'">
           <router-link to="/organizations" class="link">
             <i class="material-icons"> corporate_fare </i>
             Organizations
           </router-link>
         </li>
-        <li>
+        <li v-if="currentUser.profile.role !=='keelaAdmin'">
           <router-link to="/users" class="link">
             <i class="material-icons"> contacts </i>
             Users
@@ -45,9 +51,18 @@
 </template>
 
 <script>
+import { Meteor } from "meteor/meteor";
 export default {
   name: "SideBar",
-};
+  meteor: {
+    $subscribe: {
+      users: [],
+    },
+    currentUser() {
+      return Meteor.user();
+    },
+  },
+}
 </script>
 
 <style scoped>

@@ -111,7 +111,7 @@ export default {
       username: "",
       password: "",
       role: "",
-      roles: ["Admin", "Coordinator", "KeelaAdmin"],
+      roles: ["Admin", "Coordinator", "keelaAdmin"],
       address: "",
       phone: "",
       organizationId: "",

@@ -3,7 +3,7 @@
     <div class="card">
       <div class="card-header">
         <img src="keela-logo-full.png" alt="Logo" class="logo-image" />
-        <h2>Welcome to Keela</h2>
+        <!-- <h2>Welcome to Keela</h2> -->
       </div>
 
       <form class="login-form" @submit.prevent="handleSubmit">
@@ -83,9 +83,9 @@ export default {
 
 .card {
   /* width: 400px; */
-  background-color: #fff;
+  background-color: #ecebeb;
   border-radius: 20px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 4px rgba(0.5, 0.5, 0.5, 0.1);
 }
 
 .card-header {
@@ -96,9 +96,10 @@ export default {
   border-top-right-radius: 8px;
 }
 
-.card-header h2 {
+/* .card-header h2 {
   margin: 0;
-}
+  color:black;
+} */
 
 .login-form {
   padding: 20px;
@@ -153,8 +154,10 @@ export default {
   text-align: center;
 }
 .logo-image {
+  padding-top:30px;
   display: block;
   width: 100%;
   height: auto;
+  align-self: center;
 }
 </style>

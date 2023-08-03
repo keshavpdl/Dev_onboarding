@@ -12,7 +12,7 @@
           <th>Role</th>
           <th>Address</th>
           <th>Phone</th>
-          <th v-if="currentUser.profile.role == 'keelaAdmin'">Organization</th>
+          <!-- <th v-if="currentUser.profile.role == 'keelaAdmin'">Organization</th> -->
           <th v-if="currentUser.profile.role !== 'keelaAdmin'">Actions</th>
         </tr>
       </thead>
@@ -22,9 +22,9 @@
           <td>{{ user.profile.role }}</td>
           <td>{{ user.profile.phone }}</td>
           <td>{{ user.profile.address }}</td>
-          <td v-if="currentUser.profile.role == 'keelaAdmin'">
-            {{ user.profile.organizationId.getOrganization }}
-          </td>
+          <!-- <td v-if="currentUser.profile.role == 'keelaAdmin'">
+            {{ currentUser.profile.getOrganization }}
+          </td> -->
           <td v-if="currentUser.profile.role !== 'keelaAdmin'">
             <button
               @click="editUser(user)"
