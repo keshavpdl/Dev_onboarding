@@ -2,7 +2,7 @@
   <div class="users-tab">
     <h3>Users list</h3>
     <div class="users-count">Total Users: {{ users.length }}</div>
-    <div class="add-tags-button">
+    <div class="add-user-button">
       <button @click="addUser" class="addUser">Add Users</button>
     </div>
     <table class="user-table">
@@ -20,8 +20,8 @@
         <tr v-for="user in paginatedUsers" :key="user._id">
           <td>{{ user.username }}</td>
           <td>{{ user.profile.role }}</td>
-          <td>{{ user.profile.phone }}</td>
           <td>{{ user.profile.address }}</td>
+          <td>{{ user.profile.phone }}</td>
           <!-- <td v-if="currentUser.profile.role == 'keelaAdmin'">
             {{ currentUser.profile.getOrganization }}
           </td> -->
@@ -36,7 +36,7 @@
             <button
               @click="deleteUser(user._id)"
               class="delete-user-button"
-              v-if="currentUser.profile.role == 'Admin'"
+              v-if='currentUser.profile.role === "Admin" && user._id !== currentUser._id'
             >
               Delete
             </button>
@@ -83,7 +83,7 @@ export default {
         .find({
           "profile.organizationId": this.$store.getters.getOrganization._id,
           // "profile.role": { $ne: "keelaAdmin" },
-          _id: { $ne: this.currentUser._id }, //hiding self
+          // _id: { $ne: this.currentUser._id }, //hiding self
         })
         .fetch();
     },
@@ -170,7 +170,7 @@ export default {
 .user-table {
   width: 100%;
   border-collapse: collapse;
-margin-top:5px;
+  margin-top:5px;
 }
 
 .user-table th,

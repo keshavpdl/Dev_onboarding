@@ -17,6 +17,11 @@ Meteor.methods({
   },
   "organizations.update"(organizationId, newOrganizationDetails) {
     check(organizationId, String);
-    OrganizationsCollection.update(organizationId, newOrganizationDetails);
+    OrganizationsCollection.update(organizationId, {
+      $set: {
+       ...newOrganizationDetails,
+       updatedAt: new Date(),
+      },
+    });
   },
 });

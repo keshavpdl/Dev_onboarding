@@ -1,7 +1,7 @@
 <template>
   <div class="controls">
-    <button @click="show" class="addOrganization">Add Organization</button>
-    <modal name="addOrganizationModal" :adaptive="true" width="400px" height="210px">
+    <!-- <button @click="show" class="addOrganization">Add Organization</button> -->
+    <modal name="addOrganizationModal" :adaptive="true" width="350px" height="230px">
       <div class="addOrganizationModal">
         <div class="card">
           <div class="form-header">
@@ -48,7 +48,9 @@
               </div>
             </div>
             <div class="button-group">
-              <button type="submit">Save</button>
+              <!-- <button type="submit">Save</button> -->
+              <button type="submit" v-if="!selectedOrganization">Save</button>
+              <button type="submit" v-else>Update</button>
               <button type="button" @click="hide" class="cancel-button">Cancel</button>
             </div>
           </form>
@@ -66,39 +68,64 @@ export default {
       organizationName: "",
       address: "",
       phone: "",
+      selectedOrganization:null,
     };
   },
+  meteor: {
+    currentUser() {
+      return Meteor.user();
+    },
+    $subscribe: {
+      users: [],
+    },
+  },
   methods: {
-    show() {
+    show(organization=null) {
+      this.selectedOrganization =organization;
+      this.populateFormFields();
       this.$modal.show("addOrganizationModal");
     },
+    
     hide() {
       this.resetForm();
       this.$modal.hide("addOrganizationModal");
     },
     handleSubmit() {
-      if (this.isValidForm()) {
+      if(this.selectedOrganization){
+        Meteor.call("organizations.update",this.selectedOrganization._id,{
+        name: this.organizationName,
+        address: this.address,
+        phone: this.phone,
+        // userId: this.currentUser._id,
+        });
+      }
+      else{
         Meteor.call("organizations.insert", {
           name: this.organizationName,
           address: this.address,
           phone: this.phone,
           userId: this.currentUser._id,
         });
-        this.hide();
       }
+      this.hide();
     },
     handleCancel() {
       this.hide();
     },
+    populateFormFields() {
+      if (this.selectedOrganization) {
+        // console.log(selectedOrganization);
+        this.organizationName=this.selectedOrganization.name;
+        this.address=this.selectedOrganization.address;
+        this.phone= this.selectedOrganization.phone;
+      }
+    },
     resetForm() {
       this.organizationName = "";
-      this.phone = "";
       this.address = "";
+      this.phone = "";
+      this.selectedOrganization = null;
     },
-    // isValidForm() {
-    //   // Implement validation logic for the form inputs
-    //   // Return true if the form is valid, or false otherwise
-    // },
   },
 };
 </script>
@@ -116,10 +143,22 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
+  /* width: 100%;
+  height: 100%; */
 }
+/* .addOrganization{
+  padding: 10px 20px;
+  background-color: #7745d6;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 10px 20px;
 
+}
+.addOrganization :hover{
+  background-color: #622cc9;  
+} */
 .card {
   background-color: #fff;
   border-radius: 4px;
@@ -162,11 +201,16 @@ export default {
 
 .button-group button {
   padding: 10px 20px;
-  background-color: #007bff;
+  /* background-color: #007bff; */
+  background-color: #7745d6;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.button-group button :hover{
+  background-color: #622cc9;  
 }
 .close-button {
   border: none;
@@ -177,7 +221,7 @@ export default {
   margin-left: 95%;
   margin-top: -15%;
 }
-.cancel-button {
+/* .cancel-button {
   background-color: #ccc;
-}
+} */
 </style>

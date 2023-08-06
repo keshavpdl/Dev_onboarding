@@ -1,8 +1,19 @@
 <template>
-  <div class="heading">
+  <div class="organization-tab">
+    <h2>
+      <div class="organization-count">
+        Total Organizations: {{ organizations.length }}
+      </div>
+    </h2>
     <!-- <button @click="show" class="addOrganization">Add Organization</button> -->
-    <div class="tab-title">
-      <h1 v-if="currentUser.profile.role == 'KeelaAdmin'">Organizations {{ this.$store.getters.getOrganization.name }}</h1>
+    <div class="add-organization-button">
+      <button @click="addOrganization" class="addOrganization">Add Organization</button>
+    </div>
+    <h2>Select Organization From Table</h2>
+    <div class="organization-name">
+      <h3 v-if="currentUser.profile.role == 'keelaAdmin'">
+        Current Organization: {{ this.$store.getters.getOrganization.organizationName }}
+      </h3>
     </div>
     <div class="content-body">
       <div
@@ -10,79 +21,89 @@
         class="keela-admin-section"
       >
         <AddOrganizationForm />
-        <ul class="organizations-list">
-          <h3>Select Organization</h3>
-          <li
+        <!-- <ul class="organizations-list"> -->
+          <table class="organization-table">
+            <tr>
+              <th>Organization Name</th>
+              <th>Actions</th>
+              <!-- <th>Associated Users</th> -->
+            </tr>
+            <tr
+              v-for="organization in organizations"
+              v-bind:key="organization._id"
+            >
+              <td>
+                <button
+                  class="set-organization-button"
+                  @click="setOrganization(organization)"
+                >
+                  {{ organization.name}}
+                </button>
+              </td>
+              <!-- <td>{{ users.length }}</td> -->
+              <td>
+                <button
+                  @click="editOrganization(organization)"
+                  class="edit-organization-button"
+                >
+                  Edit
+                </button>
+                <button
+                  @click="deleteOrganization(organization._id)"
+                  class="delete-organization-button"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          </table>
+          <!-- <div class="pagination">
+            <button @click="goToPreviousPage" :disabled="currentPage === 1">
+              Previous
+            </button>
+            <button
+              @click="goToNextPage"
+              :disabled="currentPage === totalPages"
+            >
+              Next
+            </button>
+          </div> -->
+
+          <!-- <li
             v-for="organization in organizations"
             v-bind:key="organization._id"
           >
             <button @click="setOrganization(organization)">
               {{ organization.name }}
             </button>
-          </li>
-        </ul>
+          </li> -->
+        <!-- </ul> -->
       </div>
-      <h3>Users list</h3>
-      <div class="users-count">Total Users: {{ users.length }}</div>
-      <!-- <ul class="users-list">
-        <li v-for="user in users" v-bind:key="user._id">
-          {{ user.username }} Role: {{ user.profile.role }}
-          <button
-            v-if="currentUser.profile.role == 'Admin'"
-            @click="deleteUser(user._id)"
-          >
-            ❌
-          </button>
-        </li>
-      </ul> -->
-      <table class="user-table">
-      <thead>
-        <tr>
-          <th>User Name</th>
-          <th>Role</th>
-          <th>Address</th>
-          <th>Phone</th>
-          <th v-if="currentUser.profile.role == 'Admin'">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(user) in paginatedUsers" :key="user._id">
-          <td>{{ user.username }}</td>
-          <td>{{ user.profile.role }}</td>
-          <td>{{ user.profile.phone }}</td>
-          <td>{{ user.profile.address }}</td>
-          <td>
-            <button @click="editUser(user)" class="edit-user-button" v-if="currentUser.profile.role == 'Admin'">Edit</button>
-            <button @click="deleteUser(user._id)" class="delete-user-button" v-if="currentUser.profile.role == 'Admin'">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <div class="users">
+        <UsersTab />
+      </div>
 
-      <div class="addUserSection"> //TODO
-        <AddUserForm />
-      </div>
     </div>
+    <AddOrganizationForm ref="addOrganizationForm" />
   </div>
 </template>
 <script>
 import AddOrganizationForm from "./forms/AddOrganizationForm.vue";
 import { OrganizationsCollection } from "../../db/OrganizationsCollection";
-import AddUserForm from "./forms/AddUserForm.vue";
+import UsersTab from "./Users.vue";
 import { Meteor } from "meteor/meteor";
 export default {
   name: "OrganizationsTab",
   components: {
     AddOrganizationForm,
-    AddUserForm,
+    UsersTab,
   },
   data() {
-    return { 
-      organizationId: "" ,
+    return {
+      organizationId: "",
       currentPage: 1,
-      usersPerPage: 10,
+      organizationsPerPage: 10,
     };
-    
   },
   meteor: {
     $subscribe: {
@@ -100,7 +121,7 @@ export default {
         }).fetch()[0];
         if (
           org !== undefined &&
-          this.$store.getters.getOrganization.name === ""
+          this.$store.getters.getOrganization.organizationName === ""
         ) {
           this.$store.dispatch("setOrganization", org);
           //console.log(this.$store.getters.getOrganization);
@@ -115,99 +136,120 @@ export default {
         ).fetch();
       }
     },
-    users() {
-      return Meteor.users
-        .find({
-          "profile.organizationId": this.$store.getters.getOrganization._id,
-          // "profile.role": { $ne: "keelaAdmin" },
-          _id: { $ne: this.currentUser._id }, //hiding self
-        })
-        .fetch();
-    },
+    // users() {
+    //   return Meteor.users
+    //     .find({
+    //       "profile.organizationId": this.$store.getters.getOrganization._id,
+    //       // "profile.role": { $ne: "keelaAdmin" },
+    //       _id: { $ne: this.currentUser._id }, //hiding self
+    //     })
+    //     .fetch();
+    // },
   },
-  computed: {
-    paginatedUsers() {
-      const startIndex = (this.currentPage - 1) * this.usersPerPage;
-      const endIndex = startIndex + this.usersPerPage;
-      return this.users.slice(startIndex, endIndex);
-    },
-    totalPages() {
-      return Math.ceil(this.users.length / this.usersPerPage);
-    },
-  },
+  // computed: {
+  //   organizations() {
+  //     const startIndex = (this.currentPage - 1) * this.organizationsPerPage;
+  //     const endIndex = startIndex + this.organizationsPerPage;
+  //     return this.users.slice(startIndex, endIndex);
+  //   },
+  //   totalPages() {
+  //     return Math.ceil(this.organizations.length / this.organizationsPerPage);
+  //   },
+  // },
   methods: {
     setOrganization(organization) {
       this.$store.dispatch("setOrganization", organization);
       //console.table(this.$store.getters.getOrganization);
     },
-    deleteUser(userId) {
+    addOrganization() {
+      this.$refs.addOrganizationForm.resetForm();
+      this.$refs.addOrganizationForm.show();
+    },
+    deleteOrganization(organizationId) {
       //console.log(`user ${userId} deleted`);
-      Meteor.call("accounts.remove", userId);
+      Meteor.call("organizations.remove", organizationId);
     },
-    goToPreviousPage() {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-      }
+    editOrganization(organization) {
+      this.$refs.addOrganizationForm.selectedOrganization = organization;
+      this.$refs.addOrganizationForm.populateFormFields();
+      this.$refs.addOrganizationForm.show(organization);
     },
-    goToNextPage() {
-      if (this.currentPage < this.totalPages) {
-        this.currentPage++;
-      }
-    },
+    // goToPreviousPage() {
+    //   if (this.currentPage > 1) {
+    //     this.currentPage--;
+    //   }
+    // },
+    // goToNextPage() {
+    //   if (this.currentPage < this.totalPages) {
+    //     this.currentPage++;
+    //   }
+    // },
   },
 };
 </script>
 <style scoped>
-
-.users-count {
+.organization-count {
   margin-bottom: 10px;
+  text-size-adjust: 20px;
 }
-
-.add-user-button {
-  margin-bottom: 10px;
-}
-.delete-user-button {
-  padding: 5px 10px;
-  background-color:red;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.edit-user-button {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+.set-organization-button {
+  border-radius: 0px;
+  background-color: white;
+  border-color: white;
   cursor: pointer;
 }
 
-.addUser {
+.addOrganization {
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #7745d6;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-.user-table {
-  width: 100%;
+.addOrganization:hover{
+  background-color: #622cc9;
+
+}
+.add-organization-button {
+  margin-bottom: 10px;
+}
+.delete-organization-button {
+  padding: 5px 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-organization-button {
+  padding: 5px 10px;
+  background-color: #7745d6;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.edit-organization-button:hover {
+  background-color: #622cc9;
+}
+
+.organization-table {
+  width: 98%;
   border-collapse: collapse;
 }
-
-.user-table th,
-.user-table td {
+.organization-table th,
+.organization-table td {
   padding: 8px;
   border: 1px solid #ccc;
 }
 
-.user-table th {
+.organization-table th {
   background-color: #f0f0f0;
 }
 
-.user-table td {
+.organization-table td {
   text-align: left;
 }
 
