@@ -119,6 +119,10 @@ export default {
     };
   },
   meteor: {
+    $subscribe: {
+      organizations: [],
+      users: [],
+    },
     currentUser() {
       return Meteor.user();
     },

@@ -60,12 +60,16 @@ Meteor.methods({
   },
   "contacts.update"(contactId, newContactDetails) {
     ContactsCollection.update(contactId, {
+      // $set: {
+      //   fullname: newContactDetails.fullname,
+      //   email: newContactDetails.email,
+      //   address: newContactDetails.address,
+      //   phone: newContactDetails.phone,
+      // },
       $set: {
-        fullname: newContactDetails.fullname,
-        email: newContactDetails.email,
-        address: newContactDetails.address,
-        phone: newContactDetails.phone,
-      },
+        ...newContactDetails,
+        updatedAt: new Date(),
+       },
     });
   },
 });

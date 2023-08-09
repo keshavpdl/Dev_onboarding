@@ -24,14 +24,13 @@
 import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
 import { Meteor } from "meteor/meteor";
-import Register from "./components/forms/Register.vue";
-// import '~@fortawesome/fontawesome-free/css/all.min.css';
+// import Register from "./components/forms/Register.vue";
 
 export default {
   components: {
     LoginForm,
     SideBar,
-    Register
+    // Register
   },
   meteor: {
     currentUser() {

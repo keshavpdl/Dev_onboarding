@@ -32,7 +32,7 @@
       <button @click="goToPreviousPage" :disabled="currentPage === 1">Previous</button>
       <button @click="goToNextPage" :disabled="currentPage === totalPages">Next</button>
     </div>
-    <AddContactForm ref="addContactForm" />
+    <AddContactForm ref="addContactForm" :organizationId="currentUser.profile.organizationId" />
   </div>
 </template>
 
@@ -44,6 +44,8 @@ export default {
   name: "ContactsTab",
   components: {
     AddContactForm,
+    props: ['organizationId'], // Add this line to define the prop
+
   },
   data() {
     return {
@@ -59,7 +61,7 @@ export default {
       return Meteor.user();
     },
     contacts() {
-      return ContactsCollection.find({}, { sort: { createdAt: -1 } });
+      return ContactsCollection.find({ organizationId: this.currentUser.profile.organizationId }, { sort: { createdAt: -1 } })
     },
   },
   computed: {

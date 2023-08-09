@@ -1,7 +1,6 @@
 <template>
   <div class="controls">
-    <!-- <button @click="show" class="addOrganization">Add Organization</button> -->
-    <modal name="addOrganizationModal" :adaptive="true" width="350px" height="230px">
+    <modal name="addOrganizationModal" :adaptive="true" width="320px" height="230px">
       <div class="addOrganizationModal">
         <div class="card">
           <div class="form-header">

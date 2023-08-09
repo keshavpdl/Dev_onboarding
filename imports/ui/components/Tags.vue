@@ -32,7 +32,8 @@
         Next
       </button>
     </div>
-    <AddTagForm ref="addTagsForm" />
+    <!-- <AddTagForm ref="addTagsForm" /> -->
+    <AddTagForm ref="addTagsForm" :organizationId="currentUser.profile.organizationId" />
   </div>
 </template>
 
@@ -44,6 +45,7 @@ export default {
   name: "TagsTab",
   components: {
     AddTagForm,
+    props: ['organizationId'], // Add this line to define the prop
   },
   data() {
     return {
@@ -58,9 +60,12 @@ export default {
     currentUser() {
       return Meteor.user();
     },
+    // tags() {
+    //   return TagsCollection.find({}, { sort: { createdAt: -1 } });
+    // },
     tags() {
-      return TagsCollection.find({}, { sort: { createdAt: -1 } });
-    },
+    return TagsCollection.find({ organizationId: this.currentUser.profile.organizationId }, { sort: { createdAt: -1 } });
+  },
   },
   computed: {
     paginatedTags() {

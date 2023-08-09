@@ -8,7 +8,7 @@
           </div>
           <form class="tag-form" @submit.prevent="handleSubmit">
             <div class="form-group">
-              <label for="fullName">Tags Name</label>
+              <label for="tagsname">Tags Name</label>
               <div class="input-field">
                 <input
                   id="tagsname"
@@ -52,8 +52,18 @@ export default {
     return {
       tagsname: "",
       description: "",
+      organizationId:"",
       selectedTag: null,
     };
+  },
+  meteor: {
+    $subscribe: {
+      organization: [],
+      users: [],
+    },
+    currentUser() {
+      return Meteor.user();
+    },
   },
   methods: {
     show(tags = null) {
@@ -75,6 +85,8 @@ export default {
         Meteor.call("tags.insert", {
           tagsname: this.tagsname,
           description: this.description,
+          // organizationId: this.organizationId,
+          organizationId: this.currentUser.profile.organizationId,
         });
       }
 
@@ -116,7 +128,6 @@ export default {
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  /* height: fit-content; */
   height: 100%;
   width: 100%;
 }
