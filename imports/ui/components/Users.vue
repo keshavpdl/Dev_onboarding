@@ -168,7 +168,7 @@ export default {
   background-color: #622cc9;
 }
 .user-table {
-  width: 100%;
+  width: 98%;
   border-collapse: collapse;
   margin-top:5px;
 }

@@ -6,7 +6,7 @@ import OrganizationsTab from "../imports/ui/components/Organizations.vue";
 import ContactsTab from "../imports/ui/components/Contacts.vue";
 import TagsTab from "../imports/ui/components/Tags.vue";
 import WelcomeTab from "../imports/ui/components/Welcome.vue";
-import Register from "../imports/ui/components/Register.vue"
+// import Register from "../imports/ui/components/Register.vue"
 import LoginForm from "../imports/ui/components/forms/LoginForm.vue"
 import Users from "../imports/ui/components/Users.vue"
 
@@ -36,11 +36,11 @@ const routes = [
     name: "Tags",
     component: TagsTab,
   },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-  },
+  // {
+  //   path: "/register",
+  //   name: "Register",
+  //   component: Register,
+  // },
   {
     path: "/login", // Add a new route for the login form
     name: "Login",

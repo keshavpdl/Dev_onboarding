@@ -131,7 +131,9 @@ export default {
 
 }
 .tag-table {
-  width: 100%;
+  width: 98%;
+  margin-top: auto;
+  margin-bottom: auto;
   border-collapse: collapse;
 }
 

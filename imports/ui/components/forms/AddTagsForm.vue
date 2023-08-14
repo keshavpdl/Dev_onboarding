@@ -1,6 +1,6 @@
 <template>
   <div class="controls">
-    <modal name="addTagModal" :adaptive="true" width="400px" height="200px">
+    <modal name="addTagModal" class="tagModal" :adaptive="true" width="400px" height="200px">
       <div class="addTagModal">
         <div class="card">
           <div class="form-header">
@@ -75,19 +75,34 @@ export default {
       this.resetForm();
       this.$modal.hide("addTagModal");
     },
+    // handleSubmit() {
+    //   if (this.selectedTag) {
+    //     Meteor.call("tags.update", this.selectedTag._id, {
+    //       tagsname: this.tagsname,
+    //       description: this.description,
+    //     });
+    //   } else {
+    //     Meteor.call("tags.insert", {
+    //       tagsname: this.tagsname,
+    //       description: this.description,
+    //       // organizationId: this.organizationId,
+    //       organizationId: this.currentUser.profile.organizationId,
+    //     });
+    //   }
+
+    //   this.hide();
+    // },
     handleSubmit() {
-      if (this.selectedTag) {
-        Meteor.call("tags.update", this.selectedTag._id, {
+      const tagsData = {
           tagsname: this.tagsname,
           description: this.description,
-        });
-      } else {
-        Meteor.call("tags.insert", {
-          tagsname: this.tagsname,
-          description: this.description,
-          // organizationId: this.organizationId,
           organizationId: this.currentUser.profile.organizationId,
-        });
+      };
+
+      if (this.selectedContact) {
+        Meteor.call("tags.update", this.selectedContact._id, tagsData);
+      } else {
+        Meteor.call("tags.insert", tagsData);
       }
 
       this.hide();

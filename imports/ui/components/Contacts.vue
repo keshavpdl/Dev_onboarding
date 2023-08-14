@@ -3,7 +3,13 @@
     <h3>Contacts List</h3>
     <div class="contact-count">Total Contacts: {{ contacts.length }}</div>
     <div class="add-contact-button">
-      <button @click="addContact" class="addContact" v-if="currentUser.profile.role == 'Admin'">Add Contact</button>
+      <button
+        @click="addContact"
+        class="addContact"
+        v-if="currentUser.profile.role == 'Admin'"
+      >
+        Add Contact
+      </button>
     </div>
     <table class="contact-table">
       <thead>
@@ -12,40 +18,72 @@
           <th>Email</th>
           <th>Address</th>
           <th>Phone</th>
+          <th>Tags</th>
           <th v-if="currentUser.profile.role == 'Admin'">Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(contact) in paginatedContacts" :key="contact._id">
+        <tr v-for="contact in paginatedContacts" :key="contact._id">
           <td>{{ contact.fullname }}</td>
           <td>{{ contact.email }}</td>
           <td>{{ contact.address }}</td>
           <td>{{ contact.phone }}</td>
+          <!-- <td>{{ contact.tags}}</td> -->
+          <!-- <td>
+            <div v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</div>
+          </td> -->
+          <!-- <td>
+            <div v-for="tag in contact.tags" :key="tag">{{ tag }}</div>
+          </td> -->
+          <td>
+            <!-- <ol> -->
+              <li v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</li>
+            <!-- </ol> -->
+          </td>
+
           <td v-if="currentUser.profile.role == 'Admin'">
-            <button @click="editContact(contact)" class="edit-contact-button" v-if="currentUser.profile.role == 'Admin'">Edit</button>
-            <button @click="deleteContact(contact._id)" class="delete-contact-button" v-if="currentUser.profile.role == 'Admin'">Delete</button>
+            <button
+              @click="editContact(contact)"
+              class="edit-contact-button"
+              v-if="currentUser.profile.role == 'Admin'"
+            >
+              Edit
+            </button>
+            <button
+              @click="deleteContact(contact._id)"
+              class="delete-contact-button"
+              v-if="currentUser.profile.role == 'Admin'"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="pagination">
-      <button @click="goToPreviousPage" :disabled="currentPage === 1">Previous</button>
-      <button @click="goToNextPage" :disabled="currentPage === totalPages">Next</button>
+      <button @click="goToPreviousPage" :disabled="currentPage === 1">
+        Previous
+      </button>
+      <button @click="goToNextPage" :disabled="currentPage === totalPages">
+        Next
+      </button>
     </div>
-    <AddContactForm ref="addContactForm" :organizationId="currentUser.profile.organizationId" />
+    <AddContactForm
+      ref="addContactForm"
+      :organizationId="currentUser.profile.organizationId"
+    />
   </div>
 </template>
 
 <script>
 import { ContactsCollection } from "../../db/ContactsCollection";
-import AddContactForm from "./forms/AddContactsForm.vue"
+import AddContactForm from "./forms/AddContactsForm.vue";
 
 export default {
   name: "ContactsTab",
   components: {
     AddContactForm,
-    props: ['organizationId'], // Add this line to define the prop
-
+    props: ["organizationId"], // Add this line to define the prop
   },
   data() {
     return {
@@ -56,12 +94,16 @@ export default {
   meteor: {
     $subscribe: {
       contacts: [],
+      tags: [],
     },
     currentUser() {
       return Meteor.user();
     },
     contacts() {
-      return ContactsCollection.find({ organizationId: this.currentUser.profile.organizationId }, { sort: { createdAt: -1 } })
+      return ContactsCollection.find(
+        { organizationId: this.currentUser.profile.organizationId },
+        { sort: { createdAt: -1 } }
+      );
     },
   },
   computed: {
@@ -117,7 +159,7 @@ export default {
 
 .delete-contact-button {
   padding: 5px 10px;
-  background-color:red;
+  background-color: red;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -131,7 +173,7 @@ export default {
   border-radius: 4px;
   cursor: pointer;
 }
-.edit-contact-button:hover{
+.edit-contact-button:hover {
   background-color: #622cc9;
 }
 
@@ -148,10 +190,10 @@ export default {
   background-color: #622cc9;
 }
 .contact-table {
-  width: 100%;
+  width: 98%;
   border-collapse: collapse;
   margin-top: auto;
-  margin-bottom:auto ;
+  margin-bottom: auto;
   /* position: absolute; */
 }
 
