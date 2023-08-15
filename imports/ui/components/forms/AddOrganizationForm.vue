@@ -92,7 +92,7 @@ export default {
     handleSubmit() {
       if(this.selectedOrganization){
         Meteor.call("organizations.update",this.selectedOrganization._id,{
-        name: this.organizationName,
+        organizationName: this.organizationName,
         address: this.address,
         phone: this.phone,
         // userId: this.currentUser._id,
@@ -100,7 +100,7 @@ export default {
       }
       else{
         Meteor.call("organizations.insert", {
-          name: this.organizationName,
+          organizationName: this.organizationName,
           address: this.address,
           phone: this.phone,
           userId: this.currentUser._id,
@@ -114,7 +114,7 @@ export default {
     populateFormFields() {
       if (this.selectedOrganization) {
         // console.log(selectedOrganization);
-        this.organizationName=this.selectedOrganization.name;
+        this.organizationName=this.selectedOrganization.organizationName;
         this.address=this.selectedOrganization.address;
         this.phone= this.selectedOrganization.phone;
       }

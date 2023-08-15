@@ -37,7 +37,7 @@
                   class="set-organization-button"
                   @click="setOrganization(organization)"
                 >
-                  {{ organization.name}}
+                  {{ organization.organizationName}}
                 </button>
               </td>
               <!-- <td>{{ users.length }}</td> -->

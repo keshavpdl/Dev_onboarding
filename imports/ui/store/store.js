@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     organization: {
-      name: "",
+      organizationName: "",
       address: "",
       phone: "",
       _id: "",
