@@ -19,7 +19,9 @@
           <td>{{ tags.description }}</td>
           <td>
             <button @click="editTag(tags)" class="edit-tag-button">Edit</button>
-            <button @click="deleteTag(tags._id)" class = "delete-tag-button">Delete</button>
+            <button @click="deleteTag(tags._id)" class="delete-tag-button">
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
@@ -33,7 +35,10 @@
       </button>
     </div>
     <!-- <AddTagForm ref="addTagsForm" /> -->
-    <AddTagForm ref="addTagsForm" :organizationId="currentUser.profile.organizationId" />
+    <AddTagForm
+      ref="addTagsForm"
+      :organizationId="currentUser.profile.organizationId"
+    />
   </div>
 </template>
 
@@ -45,7 +50,7 @@ export default {
   name: "TagsTab",
   components: {
     AddTagForm,
-    props: ['organizationId'], // Add this line to define the prop
+    props: ["organizationId"], // Add this line to define the prop
   },
   data() {
     return {
@@ -64,8 +69,11 @@ export default {
     //   return TagsCollection.find({}, { sort: { createdAt: -1 } });
     // },
     tags() {
-    return TagsCollection.find({ organizationId: this.currentUser.profile.organizationId }, { sort: { createdAt: -1 } });
-  },
+      return TagsCollection.find(
+        { organizationId: this.currentUser.profile.organizationId },
+        { sort: { createdAt: -1 } }
+      );
+    },
   },
   computed: {
     paginatedTags() {
@@ -89,6 +97,12 @@ export default {
     },
     deleteTag(tagsId) {
       Meteor.call("tags.remove", tagsId);
+      // if (!error) {
+      //   this.$toast.error("Tags Removed successfully");
+      // } else {
+      //   console.error(error);
+      //   this.$toast.error("Error Removing Tag");
+      // }
     },
     goToPreviousPage() {
       if (this.currentPage > 1) {
@@ -126,9 +140,8 @@ export default {
   cursor: pointer;
 }
 
-.addTag:hover{
+.addTag:hover {
   background-color: #622cc9;
-
 }
 .tag-table {
   width: 98%;

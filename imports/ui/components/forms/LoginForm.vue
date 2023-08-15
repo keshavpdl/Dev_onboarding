@@ -5,29 +5,29 @@
         <img src="keela-logo-full.png" alt="Logo" class="logo-image" />
         <!-- <h2>Welcome to Keela</h2> -->
       </div>
-      
+
       <form class="login-form" @submit.prevent="handleLogin">
         <div>
           <label for="username">Username</label>
           <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Username"
-          required
-          v-model="username"
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Username"
+            required
+            v-model="username"
           />
         </div>
-        
+
         <div>
           <label for="password">Password</label>
           <input
-          id="password"
-          name="password"
-          type="password"
-          placeholder="Password"
-          required
-          v-model="password"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            v-model="password"
           />
           <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
         </div>
@@ -61,39 +61,41 @@ export default {
       username: "",
       password: "",
       errorMessage: "", // New property to hold error message
-      successMessage: "", // New property to hold success message
     };
   },
   // methods: {
-    // handleSubmit(event) {
-    //   // to reset the route at logout
-    //   if (this.$route.fullPath != "/") {
-    //     this.$router.replace("/");
-    //   }
-    //   Meteor.loginWithPassword(this.username, this.password);
-    // },
+  // handleSubmit(event) {
+  //   // to reset the route at logout
+  //   if (this.$route.fullPath != "/") {
+  //     this.$router.replace("/");
+  //   }
+  //   Meteor.loginWithPassword(this.username, this.password);
+  // },
 
-//     handleLogin(event) {
-//       event.preventDefault();
-//       Meteor.loginWithPassword(this.username, this.password, (error) => {
-//         if (error) {
-//           alert("Please Enter Valid Email and Password", error);
-//         } else {
-//           this.$router.push("/");
-//         }
-//       });
-//     },
-//   },
-// };
+  //     handleLogin(event) {
+  //       event.preventDefault();
+  //       Meteor.loginWithPassword(this.username, this.password, (error) => {
+  //         if (error) {
+  //           alert("Please Enter Valid Email and Password", error);
+  //         } else {
+  //           this.$router.push("/");
+  //         }
+  //       });
+  //     },
+  //   },
+  // };
 
-methods: {
+  methods: {
     handleLogin(event) {
       event.preventDefault();
       Meteor.loginWithPassword(this.username, this.password, (error) => {
         if (error) {
           this.errorMessage = "Invalid email or password."; // Update error message
         } else {
-            this.$router.push("/");
+          // if (!error) {
+          //   this.$toast.success("User logged in successfully");
+          // }
+          this.$router.push("/");
         }
       });
     },
@@ -182,7 +184,7 @@ methods: {
   text-align: center;
 }
 .logo-image {
-  padding-top:30px;
+  padding-top: 30px;
   display: block;
   width: 100%;
   height: auto;

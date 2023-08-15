@@ -1,6 +1,12 @@
 <template>
   <div class="controls">
-    <modal name="addTagModal" class="tagModal" :adaptive="true" width="400px" height="200px">
+    <modal
+      name="addTagModal"
+      class="tagModal"
+      :adaptive="true"
+      width="400px"
+      height="200px"
+    >
       <div class="addTagModal">
         <div class="card">
           <div class="form-header">
@@ -36,7 +42,9 @@
             <div class="button-group">
               <button type="submit" v-if="!selectedTag">Save</button>
               <button type="submit" v-else>Update</button>
-              <button @click="handleCancel" type="button" class="cancel-button">Cancel</button>
+              <button @click="handleCancel" type="button" class="cancel-button">
+                Cancel
+              </button>
             </div>
           </form>
         </div>
@@ -46,13 +54,15 @@
 </template>
 
 <script>
+import { Meteor } from "meteor/meteor";
+
 export default {
   name: "AddTagForm",
   data() {
     return {
       tagsname: "",
       description: "",
-      organizationId:"",
+      organizationId: "",
       selectedTag: null,
     };
   },
@@ -75,34 +85,75 @@ export default {
       this.resetForm();
       this.$modal.hide("addTagModal");
     },
-    // handleSubmit() {
-    //   if (this.selectedTag) {
-    //     Meteor.call("tags.update", this.selectedTag._id, {
-    //       tagsname: this.tagsname,
-    //       description: this.description,
-    //     });
-    //   } else {
-    //     Meteor.call("tags.insert", {
-    //       tagsname: this.tagsname,
-    //       description: this.description,
-    //       // organizationId: this.organizationId,
-    //       organizationId: this.currentUser.profile.organizationId,
-    //     });
-    //   }
-
-    //   this.hide();
-    // },
     handleSubmit() {
       const tagsData = {
-          tagsname: this.tagsname,
-          description: this.description,
-          organizationId: this.currentUser.profile.organizationId,
+        tagsname: this.tagsname,
+        description: this.description,
+        organizationId: this.currentUser.profile.organizationId,
       };
 
-      if (this.selectedContact) {
-        Meteor.call("tags.update", this.selectedContact._id, tagsData);
+      //   if (this.selectedTag) {
+      //     Meteor.call("tags.update", this.selectedTag._id, tagsData);
+      //   } else {
+      //     Meteor.call("tags.insert", tagsData);
+      //   }
+
+      //   this.hide();
+      // },
+    //   if (this.selectedTag) {
+    //     Meteor.call("tags.update", this.selectedTag._id, tagsData, (error) => {
+    //       if (!error) {
+    //         this.showToast("Tag updated successfully", "success");
+    //       } else {
+    //         console.error(error);
+    //         this.showToast("Error editing tag", "error");
+    //       }
+    //     });
+    //   } else {
+    //     Meteor.call("tags.insert", tagsData, (error) => {
+    //       if (!error) {
+    //         this.showToast("Tag added successfully", "success");
+    //       } else {
+    //         console.error(error);
+    //         this.showToast("Error adding tag", "error");
+    //       }
+    //     });
+    //   }
+    //   this.hide();
+    // },
+
+    // showToast(message, type) {
+    //   Vue.use(Toast, {
+    //     transition: "Vue-Toastification__bounce",
+    //     maxToasts: 20,
+    //     newestOnTop: true,
+    //   });
+
+    //   if (type === "success") {
+    //     this.$toast.success(message);
+    //   } else if (type === "error") {
+    //     this.$toast.error(message);
+    //   }
+    // },
+
+    if (this.selectedTag) {
+        Meteor.call("tags.update", this.selectedTag._id, tagsData, (error) => {
+          // if (!error) {
+          //   this.$toast.success("Tag updated successfully");
+          // } else {
+          //   console.error(error);
+          //   this.$toast.error("Error editing tag");
+          // }
+        });
       } else {
-        Meteor.call("tags.insert", tagsData);
+        Meteor.call("tags.insert", tagsData, (error) => {
+          // if (!error) {
+          //   this.$toast.success("Tag added successfully");
+          // } else {
+          //   console.error(error);
+          //   this.$toast.error("Error adding tag");
+          // }
+        });
       }
 
       this.hide();
@@ -191,9 +242,8 @@ export default {
   border-radius: 8px;
   cursor: pointer;
 }
-.button-group button:hover{
+.button-group button:hover {
   background-color: #622cc9;
-
 }
 
 .cancel-button {
@@ -203,7 +253,7 @@ export default {
   border: none;
   background: transparent;
   font-size: 30px;
-  color:lightcoral;
+  color: lightcoral;
   cursor: pointer;
   margin-left: 95%;
   margin-top: -15%;

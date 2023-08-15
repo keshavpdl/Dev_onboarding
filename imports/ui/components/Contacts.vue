@@ -37,7 +37,7 @@
           </td> -->
           <td>
             <!-- <ol> -->
-              <li v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</li>
+            <li v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</li>
             <!-- </ol> -->
           </td>
 
@@ -128,6 +128,12 @@ export default {
     },
     deleteContact(contactId) {
       Meteor.call("contacts.remove", contactId);
+      // if (!error) {
+      //   this.$toast.error("Contact Removed successfully");
+      // } else {
+      //   console.error(error);
+      //   this.$toast.error("Error Removing Contact");
+      // }
     },
     goToPreviousPage() {
       if (this.currentPage > 1) {

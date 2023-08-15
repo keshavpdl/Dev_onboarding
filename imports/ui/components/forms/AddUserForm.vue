@@ -173,7 +173,7 @@ export default {
         this.role = this.selectedUser.role;
         this.address = this.selectedUser.address;
         this.phone = this.selectedUser.phone;
-        // this.organizationId =this.selectedUser.organizationId
+        this.organizationId =this.selectedUser.organizationId
       }
     },
     resetForm() {

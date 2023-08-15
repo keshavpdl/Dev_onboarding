@@ -1,65 +1,71 @@
 <template>
   <!-- <div class="controls"> -->
-    <modal name="addContactModal" :adaptive="true" relative="true" width="400px" height="350px">
-        <div class="addContactModal" v-cloak>
-        <div class="card">
-          <div class="form-header">
-            <button class="close-button" @click="handleCancel">×</button>
+  <modal
+    name="addContactModal"
+    :adaptive="true"
+    relative="true"
+    width="400px"
+    height="350px"
+  >
+    <div class="addContactModal" v-cloak>
+      <div class="card">
+        <div class="form-header">
+          <button class="close-button" @click="handleCancel">×</button>
+        </div>
+        <form class="contact-form" @submit.prevent="handleSubmit">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <div class="input-field">
+              <input
+                id="fullname"
+                name="fullname"
+                type="text"
+                placeholder="Full Name"
+                required
+                v-model="fullname"
+              />
+            </div>
           </div>
-          <form class="contact-form" @submit.prevent="handleSubmit">
-            <div class="form-group">
-              <label for="fullName">Full Name</label>
-              <div class="input-field">
-                <input
-                  id="fullname"
-                  name="fullname"
-                  type="text"
-                  placeholder="Full Name"
-                  required
-                  v-model="fullname"
-                />
-              </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-field">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                required
+                v-model="email"
+              />
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <div class="input-field">
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  required
-                  v-model="email"
-                />
-              </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <div class="input-field">
+              <input
+                id="address"
+                name="address"
+                type="text"
+                placeholder="Address"
+                required
+                v-model="address"
+              />
             </div>
-            <div class="form-group">
-              <label for="address">Address</label>
-              <div class="input-field">
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  placeholder="Address"
-                  required
-                  v-model="address"
-                />
-              </div>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <div class="input-field">
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="Phone"
+                required
+                v-model="phone"
+              />
             </div>
-            <div class="form-group">
-              <label for="phone">Phone</label>
-              <div class="input-field">
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="Phone"
-                  required
-                  v-model="phone"
-                />
-              </div>
-            </div>
-            <!-- <div class="form-group">
+          </div>
+          <!-- <div class="form-group">
               <label for="tags">Tags</label>
               <div class="input-field">
                 <select v-model="tags" id="tags" aria-multiselectable="true" required>
@@ -73,7 +79,7 @@
                 </select>
               </div>
             </div> -->
-            <!-- <div class="form-group">
+          <!-- <div class="form-group">
               <label for="tags">Tags</label>
               <div class="input-field">
                 <select
@@ -93,34 +99,34 @@
                 </select>
               </div>
             </div> -->
-            <div class="form-group">
-              <label for="tags">Tags</label>
-              <div class="input-field">
-                <div class="multiselect">
-                  <multiselect
-                    v-model="selectedTags"
-                    placeholder="Open Dropdown to select tag"
-                    id="tags"
-                    taggable
-                    multiple
-                    :options="tags"
-                    label="tagsname"
-                    track-by="tagsname"
-                  ></multiselect>
-                </div>
+          <div class="form-group">
+            <label for="tags">Tags</label>
+            <div class="input-field">
+              <div class="multiselect">
+                <multiselect
+                  v-model="selectedTags"
+                  placeholder="Open Dropdown to select tag"
+                  id="tags"
+                  taggable
+                  multiple
+                  :options="tags"
+                  label="tagsname"
+                  track-by="tagsname"
+                ></multiselect>
               </div>
             </div>
-            <div class="button-group">
-              <button type="submit" v-if="!selectedContact">Save</button>
-              <button type="submit" v-else>Update</button>
-              <button @click="handleCancel" type="button" class="cancel-button">
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="button-group">
+            <button type="submit" v-if="!selectedContact">Save</button>
+            <button type="submit" v-else>Update</button>
+            <button @click="handleCancel" type="button" class="cancel-button">
+              Cancel
+            </button>
+          </div>
+        </form>
       </div>
-    </modal>
+    </div>
+  </modal>
   <!-- </div> -->
 </template>
 
@@ -140,7 +146,7 @@ export default {
       address: "",
       phone: "",
       selectedTags: null,
-      tagsname:"",
+      tagsname: "",
       selectedContact: null,
       modalHeight: "500px",
     };
@@ -206,10 +212,21 @@ export default {
 
       if (this.selectedContact) {
         Meteor.call("contacts.update", this.selectedContact._id, contactData);
+        // if (!error) {
+        //   this.$toast.success("Contact updated successfully");
+        // } else {
+        //   console.error(error);
+        //   this.$toast.error("Error editing Contact");
+        // }
       } else {
         Meteor.call("contacts.insert", contactData);
+        // if (!error) {
+        //   this.$toast.success("Contact added successfully");
+        // } else {
+        //   console.error(error);
+        //   this.$toast.error("Error adding Contact");
+        // }
       }
-
       this.hide();
     },
     handleCancel() {
@@ -229,7 +246,7 @@ export default {
       this.email = "";
       this.address = "";
       this.phone = "";
-      this.tags=""
+      this.tags = "";
       this.selectedContact = null;
       this.selectedTags = null;
     },
@@ -246,7 +263,7 @@ export default {
 
 .multiselect {
   max-height: 500px;
-  scroll-behavior:smooth;
+  scroll-behavior: smooth;
   padding: 0%;
   z-index: 1;
   position: sticky;
@@ -268,7 +285,7 @@ export default {
   box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.027);
   padding-right: 20px;
   padding-left: 20px;
-  padding-top:12px;
+  padding-top: 12px;
   padding-bottom: 12px;
   width: 100%;
   height: 100%;
@@ -311,7 +328,7 @@ export default {
   display: flex;
   justify-content: space-between;
   margin-top: 2%;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .button-group button {

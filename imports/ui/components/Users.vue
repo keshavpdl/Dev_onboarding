@@ -62,6 +62,7 @@ export default {
   name: "UsersTab",
   components: {
     AddUserForm,
+        props: ["organizationId"], 
   },
   data() {
     return {
@@ -82,6 +83,8 @@ export default {
       return Meteor.users
         .find({
           "profile.organizationId": this.$store.getters.getOrganization._id,
+          // "profile.organizationId": this.currentUser.profile.organizationId,
+
           // "profile.role": { $ne: "keelaAdmin" },
           // _id: { $ne: this.currentUser._id }, //hiding self
         })
