@@ -12,7 +12,7 @@
     <h2>Select Organization From Table</h2>
     <div class="organization-name">
       <h3 v-if="currentUser.profile.role == 'keelaAdmin'">
-        Current Organization: {{ this.$store.getters.getOrganization.organizationName }}
+        Current Organization: {{ this.$store.getters.getOrganization.name }}
       </h3>
     </div>
     <div class="content-body">
@@ -37,7 +37,7 @@
                   class="set-organization-button"
                   @click="setOrganization(organization)"
                 >
-                  {{ organization.organizationName}}
+                  {{ organization.name}}
                 </button>
               </td>
               <!-- <td>{{ users.length }}</td> -->
@@ -121,7 +121,7 @@ export default {
         }).fetch()[0];
         if (
           org !== undefined &&
-          this.$store.getters.getOrganization.organizationName === ""
+          this.$store.getters.getOrganization.name === ""
         ) {
           this.$store.dispatch("setOrganization", org);
           //console.log(this.$store.getters.getOrganization);
@@ -204,7 +204,7 @@ export default {
   background-color: #7745d6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 }
 

@@ -26,7 +26,7 @@
             Organizations
           </router-link>
         </li>
-        <li v-if="currentUser.profile.role !=='keelaAdmin'">
+        <li v-if="currentUser.profile.role =='Admin'">
           <router-link to="/users" class="link">
             <i class="material-icons"> contacts </i>
             Users

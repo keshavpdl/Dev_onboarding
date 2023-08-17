@@ -11,12 +11,12 @@
               <label for="organizationName">Organization Name</label>
               <div class="input-field">
                 <input
-                  id="organizationName"
-                  name="organizationName"
+                  id="name"
+                  name="name"
                   type="text"
                   placeholder="Organization Name"
                   required
-                  v-model="organizationName"
+                  v-model="name"
                 />
               </div>
             </div>
@@ -64,7 +64,7 @@ export default {
   name: "AddOrganizationForm",
   data() {
     return {
-      organizationName: "",
+      name: "",
       address: "",
       phone: "",
       selectedOrganization:null,
@@ -92,7 +92,7 @@ export default {
     handleSubmit() {
       if(this.selectedOrganization){
         Meteor.call("organizations.update",this.selectedOrganization._id,{
-        organizationName: this.organizationName,
+        name: this.name,
         address: this.address,
         phone: this.phone,
         // userId: this.currentUser._id,
@@ -100,7 +100,7 @@ export default {
       }
       else{
         Meteor.call("organizations.insert", {
-          organizationName: this.organizationName,
+          name: this.name,
           address: this.address,
           phone: this.phone,
           userId: this.currentUser._id,
@@ -114,13 +114,13 @@ export default {
     populateFormFields() {
       if (this.selectedOrganization) {
         // console.log(selectedOrganization);
-        this.organizationName=this.selectedOrganization.organizationName;
+        this.name=this.selectedOrganization.name;
         this.address=this.selectedOrganization.address;
         this.phone= this.selectedOrganization.phone;
       }
     },
     resetForm() {
-      this.organizationName = "";
+      this.name = "";
       this.address = "";
       this.phone = "";
       this.selectedOrganization = null;
