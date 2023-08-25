@@ -1,13 +1,14 @@
 <template>
   <div class="app">
     <div class="body">
-      <LoginForm v-if="!currentUser" />
-      <div v-else class="main">
+      <LoginForm v-if="!currentUser && $route.path =='/'" />
+      <Register v-if="!currentUser && $route.path =='/register'" />
+      <div class="main">
         <div class="side-bar">
-          <SideBar />
+          <SideBar v-if="currentUser" />
           <div class="content">
             <div class="user-logout" @click="logout">
-              <button>
+              <button v-if="currentUser" >
                 {{ currentUser.username }}
                 <i class="material-icons">exit_to_app</i>
               </button>
@@ -24,19 +25,22 @@
 import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
 import { Meteor } from "meteor/meteor";
-// import Register from "./components/forms/Register.vue";
+import Register from "./components/forms/Register.vue"
 
 export default {
   components: {
     LoginForm,
     SideBar,
-    // Register
+    Register
   },
   meteor: {
+    $subscribe: {
+      users: [],
+    },
     currentUser() {
       return Meteor.user();
     },
-  },
+  },  
   methods: {
     logout() {
       Meteor.logout();

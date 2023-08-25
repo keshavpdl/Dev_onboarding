@@ -15,7 +15,7 @@
       </div>
       <ul class="sidebar-menu">
         <li>
-          <router-link to="/" class="link">
+          <router-link to="/welcome" class="link">
             <i class="material-icons"> home </i>
             Dashboard
           </router-link>
@@ -43,6 +43,12 @@
             <!-- <span class="icon">&#x1F516;</span> -->
             <i class="material-icons"> label </i>
             Tags
+          </router-link>
+        </li>
+        <li v-if="currentUser.profile.role == 'keelaAdmin'">
+          <router-link to="/organization-list" class="link">
+            <i class="material-icons"> corporate_fare </i>
+            Organizations-List
           </router-link>
         </li>
       </ul>
@@ -91,12 +97,6 @@ export default {
   font-size: 24px;
   font-weight: bold;
 }
-
-/* .crm-link {
-  text-decoration: none;
-  background: none;
-} */
-
 .sidebar-menu {
   list-style-type: none;
   padding: 0;

@@ -95,7 +95,7 @@ export default {
           // if (!error) {
           //   this.$toast.success("User logged in successfully");
           // }
-          this.$router.push("/");
+          this.$router.push("/welcome");
         }
       });
     },
