@@ -3,14 +3,12 @@
     <div class="sidebar">
       <div class="sidebar-header">
         <h1 class="crm-title">
-          <!-- <router-link to="/" class="crm-link"> -->
           <img
             src="keela-logo-full.png"
             class="logo-image"
             height="100%"
             width="50%"
           />
-          <!-- </router-link> -->
         </h1>
       </div>
       <ul class="sidebar-menu">
@@ -40,15 +38,8 @@
         </li>
         <li>
           <router-link to="/tags" class="link">
-            <!-- <span class="icon">&#x1F516;</span> -->
             <i class="material-icons"> label </i>
             Tags
-          </router-link>
-        </li>
-        <li v-if="currentUser.profile.role == 'keelaAdmin'">
-          <router-link to="/organization-list" class="link">
-            <i class="material-icons"> corporate_fare </i>
-            Organizations-List
           </router-link>
         </li>
       </ul>

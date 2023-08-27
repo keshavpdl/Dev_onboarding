@@ -14,7 +14,6 @@ const SEED_USERNAME = "keela-admin";
 const SEED_PASSWORD = "test";
 
 Meteor.startup(() => {
-  //code when the server starts
   OrganizationsCollection.createIndex({ name: 1 }, { unique: true }); // making name of organization unique
   if (!Accounts.findUserByUsername(SEED_USERNAME)) {
     Accounts.createUser({
@@ -27,5 +26,4 @@ Meteor.startup(() => {
       },
     });
   }
-  //console.log(Meteor.users.find().fetch());
 });

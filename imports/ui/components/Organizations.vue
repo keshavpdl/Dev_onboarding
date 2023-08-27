@@ -5,7 +5,6 @@
         Total Organizations: {{ organizations.length }}
       </div>
     </h2>
-    <!-- <button @click="show" class="addOrganization">Add Organization</button> -->
     <div class="add-organization-button">
       <button @click="addOrganization" class="addOrganization">Add Organization</button>
     </div>
@@ -21,12 +20,10 @@
         class="keela-admin-section"
       >
         <AddOrganizationForm />
-        <!-- <ul class="organizations-list"> -->
           <table class="organization-table">
             <tr>
               <th>Organization Name</th>
               <th>Actions</th>
-              <!-- <th>Associated Users</th> -->
             </tr>
             <tr
               v-for="organization in organizations"
@@ -40,7 +37,6 @@
                   {{ organization.name}}
                 </button>
               </td>
-              <!-- <td>{{ users.length }}</td> -->
               <td>
                 <button
                   @click="editOrganization(organization)"
@@ -57,27 +53,6 @@
               </td>
             </tr>
           </table>
-          <!-- <div class="pagination">
-            <button @click="goToPreviousPage" :disabled="currentPage === 1">
-              Previous
-            </button>
-            <button
-              @click="goToNextPage"
-              :disabled="currentPage === totalPages"
-            >
-              Next
-            </button>
-          </div> -->
-
-          <!-- <li
-            v-for="organization in organizations"
-            v-bind:key="organization._id"
-          >
-            <button @click="setOrganization(organization)">
-              {{ organization.name }}
-            </button>
-          </li> -->
-        <!-- </ul> -->
       </div>
       <div class="users">
         <UsersTab />
@@ -124,7 +99,6 @@ export default {
           this.$store.getters.getOrganization.name === ""
         ) {
           this.$store.dispatch("setOrganization", org);
-          //console.log(this.$store.getters.getOrganization);
         }
         return OrganizationsCollection.find({
           _id: this.currentUser.profile.organizationId,
@@ -136,37 +110,16 @@ export default {
         ).fetch();
       }
     },
-    // users() {
-    //   return Meteor.users
-    //     .find({
-    //       "profile.organizationId": this.$store.getters.getOrganization._id,
-    //       // "profile.role": { $ne: "keelaAdmin" },
-    //       _id: { $ne: this.currentUser._id }, //hiding self
-    //     })
-    //     .fetch();
-    // },
   },
-  // computed: {
-  //   organizations() {
-  //     const startIndex = (this.currentPage - 1) * this.organizationsPerPage;
-  //     const endIndex = startIndex + this.organizationsPerPage;
-  //     return this.users.slice(startIndex, endIndex);
-  //   },
-  //   totalPages() {
-  //     return Math.ceil(this.organizations.length / this.organizationsPerPage);
-  //   },
-  // },
   methods: {
     setOrganization(organization) {
       this.$store.dispatch("setOrganization", organization);
-      //console.table(this.$store.getters.getOrganization);
     },
     addOrganization() {
       this.$refs.addOrganizationForm.resetForm();
       this.$refs.addOrganizationForm.show();
     },
     deleteOrganization(organizationId) {
-      //console.log(`user ${userId} deleted`);
       Meteor.call("organizations.remove", organizationId);
     },
     editOrganization(organization) {
@@ -174,16 +127,6 @@ export default {
       this.$refs.addOrganizationForm.populateFormFields();
       this.$refs.addOrganizationForm.show(organization);
     },
-    // goToPreviousPage() {
-    //   if (this.currentPage > 1) {
-    //     this.currentPage--;
-    //   }
-    // },
-    // goToNextPage() {
-    //   if (this.currentPage < this.totalPages) {
-    //     this.currentPage++;
-    //   }
-    // },
   },
 };
 </script>

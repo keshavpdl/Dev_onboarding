@@ -18,6 +18,7 @@
                   placeholder="Username"
                   required
                   v-model="username"
+                  autocomplete="off"
                 />
               </div>
             </div>
@@ -30,24 +31,11 @@
                   type="password"
                   placeholder="Password"
                   required
+                  autocomplete="off"
                   v-model="password"
                 />
               </div>
             </div>
-            <!-- <div class="form-group">
-              <label for="role">Role</label>
-              <div class="input-field">
-                <input
-                  id="role"
-                  name="role"
-                  type="text"
-                  placeholder="Role"
-                  required
-                  v-model="role"
-                />
-              </div> -->
-
-            <!-- </div> -->
             <div class="form-group">
               <label for="role">Role</label>
               <div class="input-field">
@@ -132,6 +120,7 @@ export default {
       this.selectedUser = user;
       this.populateFormFields();
       this.$modal.show("addUserModal");
+      this.resetForm();
     },
     hide() {
       this.resetForm();
@@ -201,7 +190,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-width: 400px; */
   width: 100%;
   height: 100%;
 }
@@ -253,7 +241,6 @@ export default {
 
 .button-group button {
   padding: 10px 20px;
-  /* background-color: #007bff; */
   background-color: #7745d6;
   color: #fff;
   border: none;

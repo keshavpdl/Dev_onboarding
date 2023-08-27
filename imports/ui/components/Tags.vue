@@ -50,7 +50,7 @@ export default {
   name: "TagsTab",
   components: {
     AddTagForm,
-    props: ["organizationId"], // Add this line to define the prop
+    props: ["organizationId"],
   },
   data() {
     return {
@@ -65,9 +65,6 @@ export default {
     currentUser() {
       return Meteor.user();
     },
-    // tags() {
-    //   return TagsCollection.find({}, { sort: { createdAt: -1 } });
-    // },
     tags() {
       return TagsCollection.find(
         { organizationId: this.currentUser.profile.organizationId },
@@ -97,12 +94,6 @@ export default {
     },
     deleteTag(tagsId) {
       Meteor.call("tags.remove", tagsId);
-      // if (!error) {
-      //   this.$toast.error("Tags Removed successfully");
-      // } else {
-      //   console.error(error);
-      //   this.$toast.error("Error Removing Tag");
-      // }
     },
     goToPreviousPage() {
       if (this.currentPage > 1) {

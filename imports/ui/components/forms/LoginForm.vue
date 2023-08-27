@@ -3,7 +3,6 @@
     <div class="card">
       <div class="card-header">
         <img src="keela-logo-full.png" alt="Logo" class="logo-image" />
-        <!-- <h2>Welcome to Keela</h2> -->
       </div>
 
       <form class="login-form" @submit.prevent="handleLogin">
@@ -60,41 +59,23 @@ export default {
     return {
       username: "",
       password: "",
-      errorMessage: "", // New property to hold error message
+      errorMessage: "",
+      props: ["organizationId"],
     };
   },
-  // methods: {
-  // handleSubmit(event) {
-  //   // to reset the route at logout
-  //   if (this.$route.fullPath != "/") {
-  //     this.$router.replace("/");
-  //   }
-  //   Meteor.loginWithPassword(this.username, this.password);
-  // },
-
-  //     handleLogin(event) {
-  //       event.preventDefault();
-  //       Meteor.loginWithPassword(this.username, this.password, (error) => {
-  //         if (error) {
-  //           alert("Please Enter Valid Email and Password", error);
-  //         } else {
-  //           this.$router.push("/");
-  //         }
-  //       });
-  //     },
-  //   },
-  // };
+  meteor: {
+    currentUser() {
+      return Meteor.user();
+    },
+  },
 
   methods: {
     handleLogin(event) {
       event.preventDefault();
       Meteor.loginWithPassword(this.username, this.password, (error) => {
         if (error) {
-          this.errorMessage = "Invalid email or password."; // Update error message
+          this.errorMessage = "Invalid email or password.";
         } else {
-          // if (!error) {
-          //   this.$toast.success("User logged in successfully");
-          // }
           this.$router.push("/welcome");
         }
       });
@@ -112,7 +93,6 @@ export default {
 }
 
 .card {
-  /* width: 400px; */
   background-color: #ecebeb;
   border-radius: 20px;
   box-shadow: 0px 4px 4px rgba(0.5, 0.5, 0.5, 0.1);
@@ -120,16 +100,10 @@ export default {
 
 .card-header {
   color: #fff;
-  /* padding: 20px; */
   width: 90%;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
-
-/* .card-header h2 {
-  margin: 0;
-  color:black;
-} */
 
 .login-form {
   padding: 20px;
@@ -155,7 +129,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Set the width to 100% */
+  width: 100%;
   height: 40px;
   font-size: 16px;
   background-color: #7745d6;
@@ -193,7 +167,7 @@ export default {
 
 .error-message {
   margin-top: 10px;
-  color: #d9534f; /* Red color for error message */
+  color: #d9534f;
   text-align: center;
 }
 </style>

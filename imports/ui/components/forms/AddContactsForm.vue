@@ -1,5 +1,4 @@
 <template>
-  <!-- <div class="controls"> -->
   <modal
     name="addContactModal"
     :adaptive="true"
@@ -65,40 +64,6 @@
               />
             </div>
           </div>
-          <!-- <div class="form-group">
-              <label for="tags">Tags</label>
-              <div class="input-field">
-                <select v-model="tags" id="tags" aria-multiselectable="true" required>
-                  <option
-                    v-for="tag in tags"
-                    :key="tag._id"
-                    :value="tag.tagsname"
-                  >
-                    {{ tag.tagsname }}
-                  </option>
-                </select>
-              </div>
-            </div> -->
-          <!-- <div class="form-group">
-              <label for="tags">Tags</label>
-              <div class="input-field">
-                <select
-                  v-model="selectedTags"
-                  id="tags"
-                  aria-multiselectable="true"
-                  required
-                  taggable
-                >
-                  <option
-                    v-for="tag in tags"
-                    :key="tag._id"
-                    :value="tag.tagsname"
-                  >
-                    {{ tag.tagsname }}
-                  </option>
-                </select>
-              </div>
-            </div> -->
           <div class="form-group">
             <label for="tags">Tags</label>
             <div class="input-field">
@@ -127,7 +92,6 @@
       </div>
     </div>
   </modal>
-  <!-- </div> -->
 </template>
 
 <script>
@@ -176,56 +140,19 @@ export default {
       this.resetForm();
       this.$modal.hide("addContactModal");
     },
-    // handleSubmit() {
-    //   if (this.selectedContact) {
-    //     Meteor.call("contacts.update", this.selectedContact._id, {
-    //       fullname: this.fullname,
-    //       email: this.email,
-    //       address: this.address,
-    //       phone: this.phone,
-    //       tags: this.selectedTags,
-    //     });
-    //   } else {
-    //     Meteor.call("contacts.insert", {
-    //       fullname: this.fullname,
-    //       email: this.email,
-    //       address: this.address,
-    //       phone: this.phone,
-    //       tags: this.selectedTags,
-    //       organizationId: this.currentUser.profile.organizationId,
-    //     });
-    //   }
-
-    //   this.hide();
-    // },
-
     handleSubmit() {
       const contactData = {
         fullname: this.fullname,
         email: this.email,
         address: this.address,
         phone: this.phone,
-        // tags: this.tags,
-        tags: this.selectedTags, // Use selectedTags here
+        tags: this.selectedTags,
         organizationId: this.currentUser.profile.organizationId,
       };
-
       if (this.selectedContact) {
         Meteor.call("contacts.update", this.selectedContact._id, contactData);
-        // if (!error) {
-        //   this.$toast.success("Contact updated successfully");
-        // } else {
-        //   console.error(error);
-        //   this.$toast.error("Error editing Contact");
-        // }
       } else {
         Meteor.call("contacts.insert", contactData);
-        // if (!error) {
-        //   this.$toast.success("Contact added successfully");
-        // } else {
-        //   console.error(error);
-        //   this.$toast.error("Error adding Contact");
-        // }
       }
       this.hide();
     },
@@ -256,11 +183,6 @@ export default {
 
 
 <style scoped>
-/* .controls {
-  text-align: center;
-  max-width: 300px;
-} */
-
 .multiselect {
   max-height: 500px;
   scroll-behavior: smooth;

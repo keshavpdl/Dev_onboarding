@@ -28,17 +28,8 @@
           <td>{{ contact.email }}</td>
           <td>{{ contact.address }}</td>
           <td>{{ contact.phone }}</td>
-          <!-- <td>{{ contact.tags}}</td> -->
-          <!-- <td>
-            <div v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</div>
-          </td> -->
-          <!-- <td>
-            <div v-for="tag in contact.tags" :key="tag">{{ tag }}</div>
-          </td> -->
           <td>
-            <!-- <ol> -->
             <li v-for="tag in contact.tags" :key="tag">{{ tag.tagsname }}</li>
-            <!-- </ol> -->
           </td>
 
           <td v-if="currentUser.profile.role == 'Admin'">
@@ -83,7 +74,7 @@ export default {
   name: "ContactsTab",
   components: {
     AddContactForm,
-    props: ["organizationId"], // Add this line to define the prop
+    props: ["organizationId"],
   },
   data() {
     return {
@@ -128,12 +119,6 @@ export default {
     },
     deleteContact(contactId) {
       Meteor.call("contacts.remove", contactId);
-      // if (!error) {
-      //   this.$toast.error("Contact Removed successfully");
-      // } else {
-      //   console.error(error);
-      //   this.$toast.error("Error Removing Contact");
-      // }
     },
     goToPreviousPage() {
       if (this.currentPage > 1) {
@@ -200,7 +185,6 @@ export default {
   border-collapse: collapse;
   margin-top: auto;
   margin-bottom: auto;
-  /* position: absolute; */
 }
 
 .contact-table th,

@@ -6,82 +6,62 @@
       </div>
 
       <form class="user-form" @submit.prevent="handleSubmit">
-        <!-- <div class="form-group"> -->
-          <div>
-            <label for="username">Username</label>
-            <!-- <div class="input-field"> -->
-              <input
-                id="username"
-                name="username"
-                type="text"
-                placeholder="Username"
-                required
-                v-model="username"
-              />
-            <!-- </div> -->
-          <!-- </div> -->
-          </div>
-          <div>
-            <!-- <div class="form-group"> -->
-              <label for="password">Password</label>
-              <!-- <div class="input-field"> -->
-                <input
-                  id="password"
-                  name="password"
-                  type="password"
-                  placeholder="Password"
-                  required
-                  v-model="password"
-                />
-              <!-- </div> -->
-            <!-- </div> -->
-          </div>
-          <div>
-            <!-- <div class="form-group"> -->
-              <label for="role">Role</label>
-              <!-- <div class="input-field"> -->
-                <select v-model="role" required>
-                  <option
-                    v-for="roleOption in roles"
-                    :key="roleOption"
-                    :value="roleOption"
-                  >
-                    {{ roleOption }}
-                  </option>
-                </select>
-              <!-- </div> -->
-            <!-- </div> -->
-          </div>
-          <div>
-            <!-- <div class="form-group"> -->
-              <label for="address">Address</label>
-              <!-- <div class="input-field"> -->
-                <input
-                  id="address"
-                  name="address"
-                  type="text"
-                  placeholder="Address"
-                  required
-                  v-model="address"
-                />
-              <!-- </div> -->
-            <!-- </div> -->
-          </div>
-          <div>
-            <!-- <div class="form-group"> -->
-              <label for="phone">Phone</label>
-              <!-- <div class="input-field"> -->
-                <input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="phone"
-                  required
-                  v-model="phone"
-                />
-              <!-- </div> -->
-            <!-- </div> -->
-          </div>
+        <div>
+          <label for="username">Username</label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="Username"
+            required
+            v-model="username"
+          />
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Password"
+            required
+            v-model="password"
+          />
+        </div>
+        <div>
+          <label for="role">Role</label>
+          <select v-model="role" required>
+            <option
+              v-for="roleOption in roles"
+              :key="roleOption"
+              :value="roleOption"
+            >
+              {{ roleOption }}
+            </option>
+          </select>
+        </div>
+        <div>
+          <label for="address">Address</label>
+          <input
+            id="address"
+            name="address"
+            type="text"
+            placeholder="Address"
+            required
+            v-model="address"
+          />
+        </div>
+        <div>
+          <label for="phone">Phone</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            placeholder="phone"
+            required
+            v-model="phone"
+          />
+        </div>
         <div class="user-register">
           <button type="submit" class="register-button">Register</button>
         </div>
@@ -106,7 +86,7 @@ export default {
       username: "",
       password: "",
       role: "",
-      roles: ["Admin", "Coordinator", "keelaAdmin"],
+      roles: ["Admin", "Coordinator"],
       address: "",
       phone: "",
       organizationId: "",
@@ -134,11 +114,7 @@ export default {
           organizationId: this.$store.getters.getOrganization._id,
         },
       });
-      // if (!error) {
-      //       this.$toast.success(`${this.username} logged in successfully`);
-      //     }
-          this.$router.push("/");
-      // this.$toast.success("User Registered successfully");
+      this.$router.push("/");
     },
 
     handleCancel() {
@@ -196,7 +172,8 @@ export default {
   font-weight: bold;
 }
 
-.user-form > div > input, select {
+.user-form > div > input,
+select {
   width: 100%;
   padding: 10px;
   border: 1px solid #aaa;
@@ -208,7 +185,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%; /* Set the width to 100% */
+  width: 100%;
   height: 40px;
   font-size: 16px;
   background-color: #7745d6;

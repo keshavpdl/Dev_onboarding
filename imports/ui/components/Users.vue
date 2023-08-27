@@ -12,7 +12,6 @@
           <th>Role</th>
           <th>Address</th>
           <th>Phone</th>
-          <!-- <th v-if="currentUser.profile.role == 'keelaAdmin'">Organization</th> -->
           <th v-if="currentUser.profile.role !== 'keelaAdmin'">Actions</th>
         </tr>
       </thead>
@@ -22,9 +21,6 @@
           <td>{{ user.profile.role }}</td>
           <td>{{ user.profile.address }}</td>
           <td>{{ user.profile.phone }}</td>
-          <!-- <td v-if="currentUser.profile.role == 'keelaAdmin'">
-            {{ currentUser.profile.getOrganization }}
-          </td> -->
           <td v-if="currentUser.profile.role !== 'keelaAdmin'">
             <button
               @click="editUser(user)"
@@ -83,10 +79,6 @@ export default {
       return Meteor.users
         .find({
           "profile.organizationId": this.$store.getters.getOrganization._id,
-          // "profile.organizationId": this.currentUser.profile.organizationId,
-
-          // "profile.role": { $ne: "keelaAdmin" },
-          // _id: { $ne: this.currentUser._id }, //hiding self
         })
         .fetch();
     },
@@ -107,7 +99,6 @@ export default {
       this.$refs.addUserForm.show();
     },
     deleteUser(userId) {
-      //console.log(`user ${userId} deleted`);
       Meteor.call("accounts.remove", userId);
     },
     editUser(user) {
@@ -146,7 +137,6 @@ export default {
 }
 .edit-user-button {
   padding: 5px 10px;
-  /* background-color: #007bff; */
   background-color: #7745d6;
   color: #fff;
   border: none;
@@ -160,7 +150,6 @@ export default {
 }
 .addUser {
   padding: 10px 20px;
-  /* background-color: #007bff; */
   background-color: #7745d6;
   color: #fff;
   border: none;

@@ -92,67 +92,11 @@ export default {
         organizationId: this.currentUser.profile.organizationId,
       };
 
-      //   if (this.selectedTag) {
-      //     Meteor.call("tags.update", this.selectedTag._id, tagsData);
-      //   } else {
-      //     Meteor.call("tags.insert", tagsData);
-      //   }
-
-      //   this.hide();
-      // },
-    //   if (this.selectedTag) {
-    //     Meteor.call("tags.update", this.selectedTag._id, tagsData, (error) => {
-    //       if (!error) {
-    //         this.showToast("Tag updated successfully", "success");
-    //       } else {
-    //         console.error(error);
-    //         this.showToast("Error editing tag", "error");
-    //       }
-    //     });
-    //   } else {
-    //     Meteor.call("tags.insert", tagsData, (error) => {
-    //       if (!error) {
-    //         this.showToast("Tag added successfully", "success");
-    //       } else {
-    //         console.error(error);
-    //         this.showToast("Error adding tag", "error");
-    //       }
-    //     });
-    //   }
-    //   this.hide();
-    // },
-
-    // showToast(message, type) {
-    //   Vue.use(Toast, {
-    //     transition: "Vue-Toastification__bounce",
-    //     maxToasts: 20,
-    //     newestOnTop: true,
-    //   });
-
-    //   if (type === "success") {
-    //     this.$toast.success(message);
-    //   } else if (type === "error") {
-    //     this.$toast.error(message);
-    //   }
-    // },
-
     if (this.selectedTag) {
         Meteor.call("tags.update", this.selectedTag._id, tagsData, (error) => {
-          // if (!error) {
-          //   this.$toast.success("Tag updated successfully");
-          // } else {
-          //   console.error(error);
-          //   this.$toast.error("Error editing tag");
-          // }
         });
       } else {
         Meteor.call("tags.insert", tagsData, (error) => {
-          // if (!error) {
-          //   this.$toast.success("Tag added successfully");
-          // } else {
-          //   console.error(error);
-          //   this.$toast.error("Error adding tag");
-          // }
         });
       }
 
