@@ -34,7 +34,6 @@
         Next
       </button>
     </div>
-    <!-- <AddTagForm ref="addTagsForm" /> -->
     <AddTagForm
       ref="addTagsForm"
       :organizationId="currentUser.profile.organizationId"

@@ -15,6 +15,7 @@
             placeholder="Username"
             required
             v-model="username"
+            autocomplete="new-username"
           />
         </div>
         <div>
@@ -26,6 +27,7 @@
             placeholder="Password"
             required
             v-model="password"
+            autocomplete="new-password"
           />
         </div>
         <div>

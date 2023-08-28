@@ -1,6 +1,5 @@
 <template>
   <div class="controls">
-    <!-- <button @click="show" class="addUser">Add User</button> -->
     <modal name="addUserModal" :adaptive="true" width="400px" height="300px">
       <div class="addUserModal">
         <div class="card">
@@ -22,7 +21,7 @@
                 />
               </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" v-if="!selectedUser">
               <label for="password">Password</label>
               <div class="input-field">
                 <input
@@ -120,7 +119,6 @@ export default {
       this.selectedUser = user;
       this.populateFormFields();
       this.$modal.show("addUserModal");
-      this.resetForm();
     },
     hide() {
       this.resetForm();
@@ -158,11 +156,9 @@ export default {
     populateFormFields() {
       if (this.selectedUser) {
         this.username = this.selectedUser.username;
-        this.password = this.selectedUser.password;
-        this.role = this.selectedUser.role;
-        this.address = this.selectedUser.address;
-        this.phone = this.selectedUser.phone;
-        this.organizationId =this.selectedUser.organizationId
+        this.role = this.selectedUser.profile["role"];
+        this.address = this.selectedUser.profile["address"];
+        this.phone = this.selectedUser.profile["phone"];
       }
     },
     resetForm() {

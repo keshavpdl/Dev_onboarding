@@ -8,7 +8,7 @@
           <SideBar v-if="currentUser" />
           <div class="content">
             <div class="user-logout" @click="logout">
-              <button v-if="currentUser" >
+              <button v-if="currentUser">
                 {{ currentUser.username }}
                 <i class="material-icons">exit_to_app</i>
               </button>
@@ -16,7 +16,7 @@
             <router-view></router-view>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </template>
@@ -25,7 +25,7 @@
 import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
 import { Meteor } from "meteor/meteor";
-import Register from "./components/forms/Register.vue"
+import Register from "./components/forms/Register.vue";
 
 export default {
   components: {
@@ -35,20 +35,33 @@ export default {
   },
   meteor: {
     $subscribe: {
-      users: [],
+      users: []
     },
     currentUser() {
       return Meteor.user();
-    },
-  },  
+    }
+  },
   methods: {
     logout() {
       Meteor.logout();
-      if (this.$route.fullPath != "/") {
+      if (this.$route.fullPath !== "/") {
         this.$router.replace("/");
       }
     },
+    performLogout() {
+      if (this.currentUser) {
+        Meteor.logout();
+      }
+    }
   },
+  mounted() {
+    // Add an event listener for the beforeunload event
+    window.addEventListener("beforeunload", this.performLogout);
+  },
+  beforeDestroy() {
+    // Remove the event listener to prevent memory leaks
+    window.removeEventListener("beforeunload", this.performLogout);
+  }
 };
 </script>
 

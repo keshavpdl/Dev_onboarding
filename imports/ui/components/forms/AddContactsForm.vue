@@ -165,7 +165,7 @@ export default {
         this.email = this.selectedContact.email;
         this.address = this.selectedContact.address;
         this.phone = this.selectedContact.phone;
-        this.tags = this.selectedContact.tag;
+        this.selectedTags = this.selectedContact.tags;
       }
     },
     resetForm() {

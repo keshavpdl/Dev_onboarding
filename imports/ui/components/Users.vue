@@ -32,7 +32,10 @@
             <button
               @click="deleteUser(user._id)"
               class="delete-user-button"
-              v-if='currentUser.profile.role === "Admin" && user._id !== currentUser._id'
+              v-if="
+                currentUser.profile.role === 'Admin' &&
+                user._id !== currentUser._id
+              "
             >
               Delete
             </button>
@@ -58,7 +61,7 @@ export default {
   name: "UsersTab",
   components: {
     AddUserForm,
-        props: ["organizationId"], 
+    props: ["organizationId"],
   },
   data() {
     return {
@@ -144,9 +147,8 @@ export default {
   cursor: pointer;
 }
 
-.edit-user-button:hover{
-  background-color: #622cc9;  
-
+.edit-user-button:hover {
+  background-color: #622cc9;
 }
 .addUser {
   padding: 10px 20px;
@@ -156,13 +158,13 @@ export default {
   border-radius: 8px;
   cursor: pointer;
 }
-.addUser:hover{
+.addUser:hover {
   background-color: #622cc9;
 }
 .user-table {
   width: 98%;
   border-collapse: collapse;
-  margin-top:5px;
+  margin-top: 5px;
 }
 
 .user-table th,
