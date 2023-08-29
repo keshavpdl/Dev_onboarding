@@ -36,18 +36,18 @@ const routes = [
     name: "Tags",
     component: TagsTab,
   },
-  {
-    path: "/register",
-    name: "Register",
-    component: Register,
-    meta: { requiresLogin: false }
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: LoginForm,
-    meta: { requiresLogin: false }
-  },
+  // {
+  //   path: "/register",
+  //   name: "Register",
+  //   component: Register,
+  //   meta: { requiresLogin: false }
+  // },
+  // {
+  //   path: "/login",
+  //   name: "Login",
+  //   component: LoginForm,
+  //   meta: { requiresLogin: false }
+  // },
 ];
 
 const router = new VueRouter({
