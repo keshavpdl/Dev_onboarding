@@ -111,6 +111,7 @@ export default {
 <style scoped>
 .tags-tab {
   text-align: left;
+  margin-left:16rem;
 }
 
 .tag-count {

@@ -1,30 +1,25 @@
 <template>
   <div class="app">
     <div class="body">
-      <LoginForm v-if="!currentUser && $route.path =='/'" />
-      <Register v-if="!currentUser && $route.path =='/register'" />
-      <div class="main">
-        <div class="side-bar">
-          <SideBar v-if="currentUser" />
-          <div class="content">
-            <div class="user-logout" @click="logout">
-              <button v-if="currentUser">
-                {{ currentUser.username }}
-                <i class="material-icons">exit_to_app</i>
-              </button>
-            </div>
-            <router-view></router-view>
+      <!-- <LoginForm v-if="!currentUser && $route.path =='/'" />
+      <Register v-if="!currentUser && $route.path =='/register'" /> -->
+      <!-- <div class="side-bar"> -->
+      <!-- <SideBar v-if="currentUser" /> -->
+    <div class="user-logout" @click="logout">
+            <button v-if="currentUser">
+              {{ currentUser.username }}
+              <i class="material-icons">exit_to_app</i>
+            </button>
           </div>
-        </div>
-      </div>
+      <router-view></router-view>
     </div>
-  </div>
+    </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import LoginForm from "./components/forms/LoginForm.vue";
 import SideBar from "./components/SideBar.vue";
-import { Meteor } from "meteor/meteor";
 import Register from "./components/forms/Register.vue";
 
 export default {
@@ -43,10 +38,17 @@ export default {
   },
   methods: {
     logout() {
-      Meteor.logout();
-      if (this.$route.fullPath !== "/") {
-        this.$router.replace("/");
-      }
+      // Meteor.logout((error) => {
+      // if (!error) {
+      //   this.$router.replace("/login");
+      // }
+      Meteor.logout((error) => {
+    if (!error) {
+      localStorage.removeItem("authToken");
+      this.$router.replace("/login");
+    }
+    });
+
     },
     performLogout() {
       if (this.currentUser) {
@@ -54,10 +56,26 @@ export default {
       }
     }
   },
+  // mounted() {
+  //   // Add an event listener for the beforeunload event
+  //   window.addEventListener("beforeunload", this.performLogout);
+  // },
   mounted() {
-    // Add an event listener for the beforeunload event
-    window.addEventListener("beforeunload", this.performLogout);
-  },
+  const authToken = localStorage.getItem("authToken");
+  if (authToken) {
+    // Re-authenticate the user using the stored token
+    Meteor.loginWithToken(authToken, (error) => {
+      if (error) {
+        console.error("Authentication error:", error);
+        // Handle authentication error (e.g., redirect to login)
+      } else {
+        // Set the authenticated user
+        this.currentUser = Meteor.user();
+      }
+    });
+  }
+},
+
   beforeDestroy() {
     // Remove the event listener to prevent memory leaks
     window.removeEventListener("beforeunload", this.performLogout);
@@ -66,6 +84,16 @@ export default {
 </script>
 
 <style scoped>
+
+.welcome-text {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding-top:20px;
+  align-self: center;
+}
 .user-logout {
   position: absolute;
   top: 10px;
@@ -95,3 +123,4 @@ export default {
   font-size: 20px;
 }
 </style>
+

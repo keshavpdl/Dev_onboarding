@@ -13,7 +13,7 @@
       </div>
       <ul class="sidebar-menu">
         <li>
-          <router-link to="/welcome" class="link">
+          <router-link to="/" class="link">
             <i class="material-icons"> home </i>
             Dashboard
           </router-link>
@@ -44,6 +44,7 @@
         </li>
       </ul>
     </div>
+    <router-view></router-view>
   </div>
 </template>
 

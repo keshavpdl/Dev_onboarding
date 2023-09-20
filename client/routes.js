@@ -9,50 +9,92 @@ import WelcomeTab from "../imports/ui/components/Welcome.vue";
 import Register from "../imports/ui/components/forms/Register.vue"
 import LoginForm from "../imports/ui/components/forms/LoginForm.vue"
 import Users from "../imports/ui/components/Users.vue"
+import SideBar from "../imports/ui/components/SideBar.vue"
 
 const routes = [
   {
-    path: "/welcome",
+    path: "/",
     name: "Welcome",
     component: WelcomeTab,
+    meta:{requiresAuth:true},
   },
   {
     path: "/organizations",
     name: "Organizations",
-    component: OrganizationsTab,
+    component: SideBar,
+    meta:{requiresAuth:true},
+    children:[
+      {
+        path:"",
+        name:"Organizations",
+        component:OrganizationsTab
+      }
+    ]
   },
   {
     path: "/users",
     name: "Users",
-    component: Users,
+    component: SideBar,
+    meta:{requiresAuth:true},
+    children:[
+      {
+        path:"",
+        name:"Contents",
+        component:Users
+      }
+    ]
   },
   {
     path: "/contacts",
     name: "Contacts",
-    component: ContactsTab,
+    component: SideBar,
+    meta:{requiresAuth:true},
+    children:[
+      {
+        path:"",
+        name:"Contents",
+        component:ContactsTab
+      }
+    ]
   },
   {
     path: "/tags",
     name: "Tags",
-    component: TagsTab,
+    component: SideBar,
+    meta:{requiresAuth:true},
+    children:[
+      {
+        path:"",
+        name:"Contents",
+        component:TagsTab
+      }
+    ]
   },
-  // {
-  //   path: "/register",
-  //   name: "Register",
-  //   component: Register,
-  //   meta: { requiresLogin: false }
-  // },
-  // {
-  //   path: "/login",
-  //   name: "Login",
-  //   component: LoginForm,
-  //   meta: { requiresLogin: false }
-  // },
+  {
+    path: "/register",
+    name: "Register",
+    component: Register,
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: LoginForm,
+    // component: () => import('../imports/ui/components/forms/LoginForm.vue'),
+  },
 ];
 
 const router = new VueRouter({
   mode: 'history',
   routes,
+});
+router.beforeEach((to, from, next) => {
+  console.log("Route:", to.path);
+  console.log("User Authenticated:", !!Meteor.userId());
+  if (to.meta.requiresAuth && !Meteor.userId()) {
+    next('/login');
+  } else {
+    next();
+  }
 });
 
 export default router;

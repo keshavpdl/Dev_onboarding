@@ -70,16 +70,28 @@ export default {
   },
 
   methods: {
+    // handleLogin(event) {
+    //   event.preventDefault();
+    //   Meteor.loginWithPassword(this.username, this.password, (error) => {
+    //     if (error) {
+    //       this.errorMessage = "Invalid email or password.";
+    //     } else {
+    //       this.$router.push("/");
+    //     }
+    //   });
+    // },
     handleLogin(event) {
-      event.preventDefault();
-      Meteor.loginWithPassword(this.username, this.password, (error) => {
-        if (error) {
-          this.errorMessage = "Invalid email or password.";
-        } else {
-          this.$router.push("/welcome");
-        }
-      });
-    },
+  event.preventDefault();
+  Meteor.loginWithPassword(this.username, this.password, (error) => {
+    if (error) {
+      this.errorMessage = "Invalid email or password.";
+    } else {
+      const token = Accounts._storedLoginToken();
+      localStorage.setItem("authToken", token);
+      this.$router.push("/");
+    }
+  });
+},
   },
 };
 </script>

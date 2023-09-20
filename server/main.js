@@ -23,6 +23,7 @@ Meteor.startup(() => {
         role: "keelaAdmin",
         address: "ktm",
         phone: "1234567890",
+        organizationId:"sBsnnjcAeZJKgoppK"
       },
     });
   }

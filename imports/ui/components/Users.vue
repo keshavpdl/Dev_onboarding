@@ -123,6 +123,10 @@ export default {
 };
 </script>
 <style scoped>
+.users-tab {
+  text-align: left;
+  margin-left:14%;
+}
 .users-count {
   margin-bottom: 10px;
 }
