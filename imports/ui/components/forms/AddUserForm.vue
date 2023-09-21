@@ -77,11 +77,11 @@
             </div>
 
             <div class="button-group">
-              <button type="submit" v-if="!selectedUser">Save</button>
-              <button type="submit" v-else>Update</button>
               <button @click="handleCancel" type="button" class="cancel-button">
                 Cancel
               </button>
+              <button type="submit" v-if="!selectedUser">Save</button>
+              <button type="submit" v-else>Update</button>
             </div>
           </form>
         </div>

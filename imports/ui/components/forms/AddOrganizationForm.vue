@@ -52,11 +52,11 @@
               </div>
             </div>
             <div class="button-group">
-              <button type="submit" v-if="!selectedOrganization">Save</button>
-              <button type="submit" v-else>Update</button>
               <button type="button" @click="hide" class="cancel-button">
                 Cancel
               </button>
+              <button type="submit" v-if="!selectedOrganization">Save</button>
+              <button type="submit" v-else>Update</button>
             </div>
           </form>
         </div>

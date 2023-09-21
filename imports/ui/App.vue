@@ -38,11 +38,7 @@ export default {
   },
   methods: {
     logout() {
-      // Meteor.logout((error) => {
-      // if (!error) {
-      //   this.$router.replace("/login");
-      // }
-      Meteor.logout((error) => {
+    Meteor.logout((error) => {
     if (!error) {
       localStorage.removeItem("authToken");
       this.$router.replace("/login");
@@ -56,10 +52,6 @@ export default {
       }
     }
   },
-  // mounted() {
-  //   // Add an event listener for the beforeunload event
-  //   window.addEventListener("beforeunload", this.performLogout);
-  // },
   mounted() {
   const authToken = localStorage.getItem("authToken");
   if (authToken) {
@@ -76,10 +68,10 @@ export default {
   }
 },
 
-  beforeDestroy() {
-    // Remove the event listener to prevent memory leaks
-    window.removeEventListener("beforeunload", this.performLogout);
-  }
+  // beforeDestroy() {
+  //   // Remove the event listener to prevent memory leaks
+  //   window.removeEventListener("beforeunload", this.performLogout);
+  // }
 };
 </script>
 <style scoped>

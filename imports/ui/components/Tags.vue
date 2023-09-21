@@ -123,7 +123,7 @@ export default {
   background-color: #7745d6;
   color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
