@@ -136,10 +136,6 @@ export default {
 
 
 <style scoped>
-.contacts-tab {
-  text-align: left;
-  margin-left:16rem;
-}
 
 .contact-count {
   margin-bottom: 10px;

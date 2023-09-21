@@ -57,7 +57,6 @@
       <div class="users">
         <UsersTab />
       </div>
-
     </div>
     <AddOrganizationForm ref="addOrganizationForm" />
   </div>
@@ -131,10 +130,6 @@ export default {
 };
 </script>
 <style scoped>
-.organization-tab {
-  text-align: left;
-  margin-left:16rem;
-}
 .organization-count {
   margin-bottom: 10px;
   text-size-adjust: 20px;

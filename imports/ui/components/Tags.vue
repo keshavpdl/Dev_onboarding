@@ -109,10 +109,6 @@ export default {
 </script>
 
 <style scoped>
-.tags-tab {
-  text-align: left;
-  margin-left:16rem;
-}
 
 .tag-count {
   margin-bottom: 10px;

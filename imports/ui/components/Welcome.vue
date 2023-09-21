@@ -1,6 +1,6 @@
 <template>
   <div class="welcome-tab">
-    <h1 class="welcome-text">Welcometo Keela!</h1>
+    <h1 class="welcome-text">Welcome To Keela</h1>
     <div class="main">
       <div class="side-bar">
           <SideBar v-if="currentUser" />

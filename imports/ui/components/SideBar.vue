@@ -64,19 +64,23 @@ export default {
 </script>
 
 <style scoped>
-.sidebar-container {
-  height: 100%;
-}
 
 .sidebar {
-  width: 240px;
-  background-color: #9e989828;
-  padding: 20px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-}
+    width: 14rem;
+    background-color: #9e989828;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 10%;
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  .sidebar-container {
+    height: 100%;
+    margin-left: 240px;
+  }
 
 .sidebar-header {
   display: flex;

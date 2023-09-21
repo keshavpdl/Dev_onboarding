@@ -82,18 +82,7 @@ export default {
   }
 };
 </script>
-
 <style scoped>
-
-.welcome-text {
-  font-size: 28px;
-  font-weight: bold;
-  text-align: center;
-  color: #333;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  padding-top:20px;
-  align-self: center;
-}
 .user-logout {
   position: absolute;
   top: 10px;
